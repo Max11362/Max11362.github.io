@@ -1,1029 +1,827 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>국가특수과학관리원</title>
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-    <style>
-        :root {
-            --gok-blue: #003766;
-            --primary: #256ef4;
-            --primary-dark: #1a56db;
-            --text: #1e2124;
-            --text-secondary: #464c53;
-            --border: #d1d5db;
-            --bg-gray: #f4f6f8;
-            --white: #ffffff;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            color: var(--text); background: var(--white); font-size: 16px; line-height: 1.5;
-        }
-        a { text-decoration: none; color: inherit; cursor: pointer; }
-        button { font-family: inherit; cursor: pointer; border: none; background: none; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>국가특수과학관리원</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+:root{--gok-blue:#003766;--primary:#256ef4;--primary-dark:#1a56db;--text:#1e2124;--text-secondary:#464c53;--border:#d1d5db;--bg-gray:#f4f6f8;--white:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:hidden}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:var(--text);background:var(--white);font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%}
+a{text-decoration:none;color:inherit;cursor:pointer}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
 
-        .gov-banner { background: #f8f9fa; border-bottom: 1px solid #e5e7eb; font-size: 13px; color: #4b5563; padding: 8px 0; }
-        .gov-banner-inner { max-width: 1280px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-        .gov-banner-left { display: flex; align-items: center; gap: 8px; }
-        .gov-banner-right a { color: #4b5563; margin-left: 16px; font-size: 13px; }
-        .gov-banner-right a:hover { color: var(--primary); }
+.gov-banner{background:#f8f9fa;border-bottom:1px solid #e5e7eb;font-size:12px;color:#4b5563;padding:8px 0}
+.gov-banner-inner{max-width:1280px;margin:0 auto;padding:0 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.gov-banner-left{display:flex;align-items:center;gap:6px}
+.gov-banner-right{display:flex;flex-wrap:wrap;gap:4px 12px}
+.gov-banner-right a{color:#4b5563;font-size:12px}
+.gov-banner-right a:hover{color:var(--primary)}
 
-        header { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
-        .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 20px; height: 80px; display: flex; align-items: center; justify-content: space-between; }
-        .logo { display: flex; align-items: center; gap: 12px; }
-        .logo-symbol { width: 48px; height: 48px; background: var(--gok-blue); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 13px; text-align: center; line-height: 1.2; }
-        .logo-text strong { font-size: 20px; font-weight: 700; color: var(--gok-blue); }
-        .logo-text span { font-size: 12px; color: var(--text-secondary); display: block; margin-top: 2px; }
+header{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.header-inner{max-width:1280px;margin:0 auto;padding:0 16px;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.logo{display:flex;align-items:center;gap:10px;min-width:0}
+.logo-symbol{width:42px;height:42px;flex-shrink:0;background:var(--gok-blue);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px;text-align:center;line-height:1.2}
+.logo-text{min-width:0}
+.logo-text strong{font-size:16px;font-weight:700;color:var(--gok-blue);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logo-text span{font-size:11px;color:var(--text-secondary);display:block;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-        nav ul { display: flex; list-style: none; gap: 2px; }
-        nav a { display: block; padding: 10px 16px; font-size: 15px; font-weight: 500; border-radius: 4px; transition: all 0.15s; }
-        nav a:hover, nav a.active { background: #eff6ff; color: var(--primary); }
+nav ul{display:flex;list-style:none;gap:2px}
+nav a{display:block;padding:10px 14px;font-size:14px;font-weight:500;border-radius:4px;white-space:nowrap}
+nav a:hover,nav a.active{background:#eff6ff;color:var(--primary)}
 
-        .header-utils { display: flex; align-items: center; gap: 10px; }
-        .btn-icon { width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 4px; background: white; display: flex; align-items: center; justify-content: center; }
-        .btn-icon:hover { border-color: var(--primary); color: var(--primary); }
-        .btn-login { height: 36px; padding: 0 16px; font-size: 14px; font-weight: 500; border: 1px solid var(--border); border-radius: 4px; background: white; }
-        .btn-login:hover { border-color: var(--primary); color: var(--primary); }
-        .btn-login.logged { background: var(--gok-blue); color: white; border-color: var(--gok-blue); }
+.header-utils{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.btn-icon{width:40px;height:40px;border:1px solid var(--border);border-radius:4px;background:#fff;display:flex;align-items:center;justify-content:center}
+.btn-login{height:36px;padding:0 12px;font-size:13px;font-weight:500;border:1px solid var(--border);border-radius:4px;background:#fff;white-space:nowrap}
+.btn-login.logged{background:var(--gok-blue);color:#fff;border-color:var(--gok-blue)}
+.user-info{display:none;align-items:center;gap:6px;font-size:12px}
+.user-info.show{display:flex}
+.user-info .name{font-weight:600;color:var(--gok-blue);max-width:80px;overflow:hidden;text-overflow:ellipsis}
+.user-info .level{background:#eff6ff;color:var(--primary);padding:2px 6px;border-radius:10px;font-size:10px;font-weight:600}
 
-        .user-info { display: none; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary); }
-        .user-info.show { display: flex; }
-        .user-info .name { font-weight: 600; color: var(--gok-blue); }
-        .user-info .level { background: #eff6ff; color: var(--primary); padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+.search-panel,.allmenu-panel{display:none;background:#f8fafc;border-bottom:1px solid var(--border);padding:16px}
+.search-panel.active,.allmenu-panel.active{display:block}
+.search-box{max-width:700px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap}
+.search-box input{flex:1;min-width:140px;height:44px;border:1px solid var(--border);border-radius:6px;padding:0 14px;font-size:16px}
+.allmenu-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.allmenu-col strong{display:block;font-size:14px;color:var(--gok-blue);margin-bottom:10px}
+.allmenu-col a{display:block;font-size:14px;color:var(--text-secondary);padding:8px 0}
 
-        .search-panel, .allmenu-panel { display: none; background: #f8fafc; border-bottom: 1px solid var(--border); padding: 20px; }
-        .search-panel.active, .allmenu-panel.active { display: block; }
-        .search-box { max-width: 700px; margin: 0 auto; display: flex; gap: 8px; }
-        .search-box input { flex: 1; height: 48px; border: 1px solid var(--border); border-radius: 6px; padding: 0 16px; font-size: 16px; }
-        .allmenu-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
-        .allmenu-col strong { display: block; font-size: 15px; color: var(--gok-blue); margin-bottom: 12px; }
-        .allmenu-col a { display: block; font-size: 14px; color: var(--text-secondary); padding: 6px 0; }
-        .allmenu-col a:hover { color: var(--primary); }
+.hero{background:linear-gradient(135deg,#f0f7ff,#e8f0fe);border-bottom:1px solid #dbeafe;padding:40px 16px}
+.hero-inner{max-width:1280px;margin:0 auto}
+.hero h1{font-size:26px;font-weight:700;color:var(--gok-blue);line-height:1.3;margin-bottom:12px}
+.hero p{font-size:15px;color:var(--text-secondary);margin-bottom:24px;max-width:620px}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap}
 
-        .hero { background: linear-gradient(135deg, #f0f7ff 0%, #e8f0fe 100%); border-bottom: 1px solid #dbeafe; padding: 56px 20px; }
-        .hero-inner { max-width: 1280px; margin: 0 auto; }
-        .hero h1 { font-size: 32px; font-weight: 700; color: var(--gok-blue); line-height: 1.3; margin-bottom: 14px; }
-        .hero p { font-size: 17px; color: var(--text-secondary); margin-bottom: 28px; max-width: 560px; }
-        .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 20px;font-size:14px;font-weight:500;border-radius:6px;border:none}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-outline{background:#fff;color:var(--text);border:1px solid var(--border)}
+.btn-sm{height:36px;padding:0 14px;font-size:13px}
 
-        .btn { display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 24px; font-size: 15px; font-weight: 500; border-radius: 6px; border: none; transition: all 0.15s; cursor: pointer; }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-primary:hover { background: var(--primary-dark); }
-        .btn-outline { background: white; color: var(--text); border: 1px solid var(--border); }
-        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
-        .btn-sm { height: 36px; padding: 0 14px; font-size: 13px; }
+.container{max-width:1280px;margin:0 auto;padding:32px 16px 48px}
+.page{display:none}.page.active{display:block}
+.section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px;gap:12px}
+.section-title{font-size:20px;font-weight:700}
+.section-more{font-size:13px;color:var(--primary);font-weight:500;white-space:nowrap}
 
-        .container { max-width: 1280px; margin: 0 auto; padding: 48px 20px 60px; }
-        .page { display: none; }
-        .page.active { display: block; }
+.card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px}
+.card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px;cursor:pointer}
+.card-icon{width:40px;height:40px;background:#eff6ff;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--primary);font-weight:700;font-size:14px}
+.card h3{font-size:16px;font-weight:600;margin-bottom:8px}
+.card p{font-size:13px;color:var(--text-secondary);line-height:1.6}
 
-        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; }
-        .section-title { font-size: 22px; font-weight: 700; }
-        .section-more { font-size: 14px; color: var(--primary); font-weight: 500; }
+.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:36px}
+.board{border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.board-header{background:var(--bg-gray);padding:12px 16px;font-weight:600;font-size:15px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.board-list{list-style:none}
+.board-list li{border-bottom:1px solid #f0f0f0}
+.board-list a{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:12px 16px;font-size:14px}
+.board-list .date{color:#9ca3af;font-size:12px;flex-shrink:0}
 
-        .card-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 48px; }
-        .card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 24px; transition: box-shadow 0.2s; cursor: pointer; }
-        .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-        .card-icon { width: 44px; height: 44px; background: #eff6ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--primary); font-weight: 700; font-size: 15px; }
-        .card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
-        .card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.quick-links{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.quick-item{background:var(--bg-gray);border-radius:8px;padding:16px 8px;text-align:center;border:1px solid transparent}
+.quick-item strong{display:block;font-size:13px;font-weight:600;margin-top:6px}
 
-        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 48px; }
-        .board { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-        .board-header { background: var(--bg-gray); padding: 14px 20px; font-weight: 600; font-size: 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .board-list { list-style: none; }
-        .board-list li { border-bottom: 1px solid #f0f0f0; }
-        .board-list a { display: flex; justify-content: space-between; padding: 14px 20px; font-size: 14.5px; }
-        .board-list a:hover { background: #f9fafb; }
-        .board-list .date { color: #9ca3af; font-size: 13px; margin-left: 16px; flex-shrink: 0; }
+.page-title{font-size:24px;font-weight:700;color:var(--gok-blue);margin-bottom:6px}
+.breadcrumb{font-size:12px;color:#6b7280;margin-bottom:24px}
+.content-box{background:#fff;border:1px solid var(--border);border-radius:8px;padding:24px 20px;margin-bottom:20px;line-height:1.8}
+.content-box h3{font-size:17px;margin-bottom:12px;color:var(--gok-blue)}
+.content-box p{color:var(--text-secondary);margin-bottom:12px;font-size:14px}
+.content-box ul{padding-left:18px;color:var(--text-secondary);margin-bottom:12px;font-size:14px}
+.content-box li{margin-bottom:6px}
+.gov-table{width:100%;border-collapse:collapse;font-size:13px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gov-table thead,.gov-table tbody,.gov-table tr{display:table;width:100%;table-layout:fixed}
+.gov-table th,.gov-table td{border:1px solid var(--border);padding:10px 12px;text-align:left;word-break:keep-all}
+.gov-table th{background:var(--bg-gray);font-weight:600}
 
-        .quick-links { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
-        .quick-item { background: var(--bg-gray); border-radius: 8px; padding: 20px 12px; text-align: center; transition: all 0.15s; border: 1px solid transparent; }
-        .quick-item:hover { background: white; border-color: var(--primary); color: var(--primary); }
-        .quick-item strong { display: block; font-size: 14px; font-weight: 600; margin-top: 8px; }
+.staff-panel{display:none;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:8px;padding:16px;margin-bottom:28px}
+.staff-panel.show{display:block}
+.staff-panel h3{font-size:15px;color:var(--gok-blue);margin-bottom:12px}
+.staff-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.notice-list{list-style:none}
+.notice-list li{background:#fff;border:1px solid #e0e7ff;border-radius:6px;padding:12px 14px;margin-bottom:8px;cursor:pointer}
+.notice-list .ntitle{font-weight:600;font-size:14px;margin-bottom:4px}
+.notice-list .nmeta{font-size:12px;color:#6b7280}
 
-        .page-title { font-size: 28px; font-weight: 700; color: var(--gok-blue); margin-bottom: 8px; }
-        .breadcrumb { font-size: 13px; color: #6b7280; margin-bottom: 32px; }
-        .breadcrumb span { margin: 0 6px; color: #d1d5db; }
-        .content-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 32px; margin-bottom: 24px; line-height: 1.7; }
-        .content-box h3 { font-size: 18px; margin-bottom: 12px; color: var(--gok-blue); }
-        .content-box p { color: var(--text-secondary); margin-bottom: 12px; }
-        .gov-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
-        .gov-table th, .gov-table td { border: 1px solid var(--border); padding: 12px 16px; text-align: left; }
-        .gov-table th { background: var(--bg-gray); font-weight: 600; }
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;align-items:flex-end;justify-content:center;padding:0}
+.modal-overlay.active{display:flex}
+.modal{background:#fff;border-radius:16px 16px 0 0;width:100%;max-width:520px;max-height:90vh;overflow-y:auto}
+.modal.wide{max-width:600px}
+.modal-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#fff}
+.modal-header h3{font-size:17px;font-weight:600}
+.modal-close{width:36px;height:36px;font-size:22px;color:#6b7280}
+.modal-body{padding:20px}
+.modal-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;bottom:0;background:#fff}
+.modal-footer .left-opt{margin-right:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-secondary)}
+.modal-footer .left-opt input{width:16px;height:16px;accent-color:var(--primary)}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}
+.form-group input,.form-group textarea{width:100%;border:1px solid var(--border);border-radius:6px;padding:12px;font-size:16px}
+.form-group input{height:44px}
+.form-group textarea{min-height:120px;resize:vertical}
+.login-hint{background:#f0f7ff;border:1px solid #dbeafe;border-radius:6px;padding:12px;font-size:12px;color:#1e40af;margin-bottom:14px;line-height:1.7}
 
-        /* 내부 공지 영역 (로그인 후) */
-        .staff-panel {
-            display: none; background: #f0f7ff; border: 1px solid #bfdbfe; border-radius: 8px;
-            padding: 20px; margin-bottom: 32px;
-        }
-        .staff-panel.show { display: block; }
-        .staff-panel h3 { font-size: 16px; color: var(--gok-blue); margin-bottom: 12px; }
-        .staff-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
-        .notice-list { list-style: none; }
-        .notice-list li {
-            background: white; border: 1px solid #e0e7ff; border-radius: 6px;
-            padding: 12px 16px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.15s;
-        }
-        .notice-list li:hover { border-color: var(--primary); }
-        .notice-list .ntitle { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
-        .notice-list .nmeta { font-size: 12px; color: #6b7280; }
+.reorg-badge{display:inline-block;background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;font-size:12px;font-weight:600;padding:4px 10px;border-radius:4px;margin-bottom:14px}
+.reorg-box{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin:14px 0;font-size:13px;color:var(--text-secondary);line-height:1.7}
 
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-        .modal-overlay.active { display: flex; }
-        .modal { background: white; border-radius: 10px; width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; }
-        .modal.wide { max-width: 560px; }
-        .modal-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .modal-header h3 { font-size: 18px; font-weight: 600; }
-        .modal-close { width: 32px; height: 32px; font-size: 22px; color: #6b7280; cursor: pointer; }
-        .modal-body { padding: 24px; }
-        .modal-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
-        .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
-        .form-group input, .form-group textarea {
-            width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; font-size: 15px;
-        }
-        .form-group input { height: 44px; }
-        .form-group textarea { min-height: 120px; resize: vertical; }
-        .login-hint { background: #f0f7ff; border: 1px solid #dbeafe; border-radius: 6px; padding: 12px 14px; font-size: 13px; color: #1e40af; margin-bottom: 16px; line-height: 1.6; }
+footer{background:#1e2124;color:#d1d5db;padding:36px 16px 24px;font-size:13px;position:relative}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;margin-bottom:28px}
+.footer-brand strong{display:block;font-size:15px;color:#fff;margin-bottom:10px}
+.footer-brand p{line-height:1.7;color:#9ca3af;font-size:13px}
+.footer-col strong{display:block;color:#fff;margin-bottom:12px;font-size:13px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:8px}
+.footer-col a{color:#9ca3af;font-size:13px}
+.footer-bottom{border-top:1px solid #374151;padding-top:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;color:#6b7280;font-size:12px}
+.footer-bottom .links a{color:#9ca3af;margin-left:12px}
+.secret-btn{position:absolute;bottom:10px;right:12px;width:12px;height:12px;background:#2a2e35;border-radius:50%;opacity:.4}
 
-        footer { background: #1e2124; color: #d1d5db; padding: 48px 20px 28px; font-size: 14px; position: relative; }
-        .footer-inner { max-width: 1280px; margin: 0 auto; }
-        .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
-        .footer-brand strong { display: block; font-size: 16px; color: white; margin-bottom: 12px; }
-        .footer-brand p { line-height: 1.7; color: #9ca3af; }
-        .footer-col strong { display: block; color: white; margin-bottom: 14px; font-size: 14px; }
-        .footer-col ul { list-style: none; }
-        .footer-col li { margin-bottom: 8px; }
-        .footer-col a { color: #9ca3af; font-size: 13.5px; }
-        .footer-col a:hover { color: white; }
-        .footer-bottom { border-top: 1px solid #374151; padding-top: 22px; display: flex; justify-content: space-between; align-items: center; color: #6b7280; font-size: 13px; }
-        .footer-bottom .links a { color: #9ca3af; margin-left: 16px; }
-        .secret-btn { position: absolute; bottom: 10px; right: 14px; width: 10px; height: 10px; background: #2a2e35; border-radius: 50%; opacity: 0.35; cursor: pointer; }
-        .secret-btn:hover { opacity: 0.8; }
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:#1e2124;color:#fff;padding:12px 20px;border-radius:8px;font-size:13px;z-index:2000;opacity:0;transition:all .3s;max-width:calc(100% - 32px);text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 
-        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1e2124; color: white; padding: 14px 24px; border-radius: 8px; font-size: 14px; z-index: 2000; opacity: 0; transition: all 0.3s; }
-        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+.messenger-fab{display:none;position:fixed;bottom:20px;right:16px;width:56px;height:56px;border-radius:50%;background:var(--gok-blue);color:#fff;font-size:22px;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:500;align-items:center;justify-content:center}
+.messenger-fab.show{display:flex}
+.messenger-fab .badge{position:absolute;top:-2px;right:-2px;background:#dc2626;color:#fff;font-size:11px;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.messenger-window{display:none;position:fixed;bottom:0;right:0;left:0;width:100%;height:85vh;max-height:640px;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.15);z-index:600;flex-direction:column;overflow:hidden;border:1px solid var(--border)}
+.messenger-window.open{display:flex}
+.msg-header{background:var(--gok-blue);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.msg-header h3{font-size:14px;font-weight:600}
+.msg-header button{color:#fff;font-size:20px;padding:4px 8px}
+.msg-body{display:flex;flex:1;overflow:hidden;min-height:0}
+.msg-contacts{width:120px;background:#f8fafc;border-right:1px solid var(--border);overflow-y:auto;flex-shrink:0}
+.contact-item{padding:12px 8px;font-size:12px;cursor:pointer;border-bottom:1px solid #eee}
+.contact-item.active{background:#eff6ff}
+.contact-item .cname{font-weight:600;margin-bottom:2px;word-break:break-all}
+.contact-item .clevel{font-size:10px;color:#6b7280}
+.contact-item .cstatus{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:3px}
+.contact-item .cstatus.online{background:#22c55e}
+.contact-item .cstatus.offline{background:#9ca3af}
+.msg-chat{flex:1;display:flex;flex-direction:column;min-width:0}
+.msg-messages{flex:1;overflow-y:auto;padding:12px;background:#f9fafb;-webkit-overflow-scrolling:touch}
+.msg-bubble{max-width:88%;padding:10px 12px;border-radius:10px;font-size:13px;line-height:1.5;margin-bottom:10px;word-break:break-word}
+.msg-bubble.them{background:#fff;border:1px solid #e5e7eb;border-bottom-left-radius:2px}
+.msg-bubble.me{background:var(--primary);color:#fff;margin-left:auto;border-bottom-right-radius:2px}
+.msg-bubble .meta{font-size:10px;opacity:.7;margin-bottom:3px}
+.msg-input-area{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--border);background:#fff;padding-bottom:max(10px,env(safe-area-inset-bottom))}
+.msg-input-area input{flex:1;height:40px;border:1px solid var(--border);border-radius:20px;padding:0 14px;font-size:16px}
+.msg-input-area button{width:40px;height:40px;border-radius:50%;background:var(--primary);color:#fff;font-size:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.msg-empty{flex:1;display:flex;align-items:center;justify-content:center;color:#9ca3af;font-size:13px;text-align:center;padding:20px}
 
-        /* 메신저 */
-        .messenger-fab { display: none; position: fixed; bottom: 28px; right: 28px; width: 60px; height: 60px; border-radius: 50%; background: var(--gok-blue); color: white; font-size: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); z-index: 500; align-items: center; justify-content: center; }
-        .messenger-fab.show { display: flex; }
-        .messenger-fab .badge { position: absolute; top: -4px; right: -4px; background: #dc2626; color: white; font-size: 11px; font-weight: 700; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .messenger-window { display: none; position: fixed; bottom: 100px; right: 28px; width: 380px; height: 520px; background: white; border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.18); z-index: 600; flex-direction: column; overflow: hidden; border: 1px solid var(--border); }
-        .messenger-window.open { display: flex; }
-        .msg-header { background: var(--gok-blue); color: white; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; }
-        .msg-header h3 { font-size: 15px; font-weight: 600; }
-        .msg-header button { color: white; font-size: 18px; opacity: 0.8; }
-        .msg-body { display: flex; flex: 1; overflow: hidden; }
-        .msg-contacts { width: 130px; background: #f8fafc; border-right: 1px solid var(--border); overflow-y: auto; flex-shrink: 0; }
-        .contact-item { padding: 12px 10px; font-size: 12px; cursor: pointer; border-bottom: 1px solid #eee; }
-        .contact-item:hover, .contact-item.active { background: #eff6ff; }
-        .contact-item .cname { font-weight: 600; color: var(--text); margin-bottom: 2px; }
-        .contact-item .clevel { font-size: 10px; color: #6b7280; }
-        .contact-item .cstatus { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; }
-        .contact-item .cstatus.online { background: #22c55e; }
-        .contact-item .cstatus.offline { background: #9ca3af; }
-        .msg-chat { flex: 1; display: flex; flex-direction: column; }
-        .msg-messages { flex: 1; overflow-y: auto; padding: 14px; background: #f9fafb; }
-        .msg-bubble { max-width: 85%; padding: 10px 12px; border-radius: 10px; font-size: 13px; line-height: 1.5; margin-bottom: 10px; word-break: break-word; }
-        .msg-bubble.them { background: white; border: 1px solid #e5e7eb; border-bottom-left-radius: 2px; }
-        .msg-bubble.me { background: var(--primary); color: white; margin-left: auto; border-bottom-right-radius: 2px; }
-        .msg-bubble .meta { font-size: 10px; opacity: 0.7; margin-bottom: 3px; }
-        .msg-input-area { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--border); background: white; }
-        .msg-input-area input { flex: 1; height: 40px; border: 1px solid var(--border); border-radius: 20px; padding: 0 14px; font-size: 13px; }
-        .msg-input-area button { width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: white; font-size: 16px; display: flex; align-items: center; justify-content: center; }
-        .msg-empty { flex: 1; display: flex; align-items: center; justify-content: center; color: #9ca3af; font-size: 13px; text-align: center; padding: 20px; }
+body.scp-mode{background:#0b0b0b;color:#c8c8c8}
+body.scp-mode .gov-wrapper{display:none!important}
+body.scp-mode .messenger-fab,body.scp-mode .messenger-window{display:none!important}
+.scp-wrapper{display:none}
+body.scp-mode .scp-wrapper{display:block}
+.scp-topbar{background:#111;border-bottom:1px solid #222;font-size:11px;color:#666;padding:6px 0}
+.scp-topbar-inner{max-width:1100px;margin:0 auto;padding:0 16px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.scp-topbar span{color:#990000}
+.scp-header{background:#0f0f0f;border-bottom:3px solid #8b0000;padding:14px 0;position:sticky;top:0;z-index:100}
+.scp-header-inner{max-width:1100px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.scp-logo{display:flex;align-items:center;gap:12px}
+.scp-emblem{width:44px;height:44px;border:2px solid #8b0000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#8b0000;background:#0a0a0a;flex-shrink:0}
+.scp-logo-text h1{font-size:16px;color:#e8e8e8;letter-spacing:.5px;margin-bottom:2px}
+.scp-logo-text p{font-size:10px;color:#8b0000;letter-spacing:1px}
+.scp-nav{display:flex;gap:4px;flex-wrap:wrap}
+.scp-nav a{color:#999;font-size:12px;padding:8px 12px;border-radius:3px}
+.scp-nav a.active{color:#e8e8e8;background:#1a1a1a}
+.scp-page{display:none}.scp-page.active{display:block}
+.scp-hero{background:linear-gradient(to bottom,#111,#0b0b0b);border-bottom:1px solid #1a1a1a;padding:48px 16px;text-align:center}
+.scp-warning{display:inline-block;border:1px solid #8b0000;color:#8b0000;padding:6px 14px;font-size:10px;letter-spacing:1px;margin-bottom:20px}
+.scp-hero h2{font-size:26px;color:#e8e8e8;letter-spacing:2px;margin-bottom:8px}
+.scp-hero .motto{font-size:12px;color:#8b0000;letter-spacing:3px;margin-bottom:20px}
+.scp-hero p{max-width:700px;margin:0 auto;color:#777;font-size:13px;line-height:1.8}
+.scp-container{max-width:1100px;margin:0 auto;padding:32px 16px}
+.scp-section-title{font-size:14px;color:#e0e0e0;letter-spacing:1px;border-left:3px solid #8b0000;padding-left:10px;margin-bottom:18px}
+.scp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px}
+.scp-card{background:#111;border:1px solid #222;padding:20px}
+.scp-card h3{color:#e0e0e0;font-size:13px;margin-bottom:8px}
+.scp-card p{color:#777;font-size:12px;line-height:1.7}
+.scp-object{background:#111;border:1px solid #222;margin-bottom:12px;padding:16px;cursor:pointer}
+.scp-object-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px;flex-wrap:wrap}
+.scp-object-id{color:#8b0000;font-weight:700;font-size:13px}
+.scp-object-class{font-size:10px;padding:3px 8px;border:1px solid #333;color:#aaa}
+.scp-object-class.safe{border-color:#2e7d32;color:#66bb6a}
+.scp-object-class.euclid{border-color:#f9a825;color:#ffee58}
+.scp-object-class.keter{border-color:#c62828;color:#ef5350}
+.scp-object p{color:#777;font-size:12px}
+.scp-info-box{background:#111;border:1px solid #222;padding:20px;margin-bottom:20px;line-height:1.8}
+.scp-info-box h3{color:#e0e0e0;font-size:14px;margin-bottom:10px}
+.scp-info-box p{color:#777;font-size:13px;margin-bottom:8px}
+.scp-table{width:100%;border-collapse:collapse;font-size:12px;display:block;overflow-x:auto}
+.scp-table th,.scp-table td{border:1px solid #222;padding:10px}
+.scp-table th{background:#151515;color:#ccc}
+.scp-table td{color:#888}
+.scp-footer{background:#080808;border-top:1px solid #1a1a1a;padding:32px 16px;text-align:center;font-size:11px;color:#444}
+.scp-back-btn{display:inline-block;margin-top:16px;padding:10px 18px;border:1px solid #333;color:#666;font-size:12px}
+.scp-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;align-items:flex-end;justify-content:center;padding:0}
+.scp-modal-overlay.active{display:flex}
+.scp-modal{background:#111;border:1px solid #333;width:100%;max-width:640px;max-height:85vh;overflow-y:auto;border-radius:16px 16px 0 0}
+.scp-modal-header{padding:16px 18px;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center}
+.scp-modal-header h3{color:#e0e0e0;font-size:14px}
+.scp-modal-close{color:#666;font-size:22px}
+.scp-modal-body{padding:18px;color:#888;font-size:13px;line-height:1.8}
+.scp-modal-body .label{color:#8b0000;font-size:11px;margin-bottom:4px}
+.scp-modal-footer{padding:12px 18px;border-top:1px solid #222;display:flex;justify-content:flex-end}
+.scp-btn{padding:8px 16px;border:1px solid #333;color:#aaa;font-size:12px}
 
-        /* SCP 모드 */
-        body.scp-mode { background: #0b0b0b; color: #c8c8c8; }
-        body.scp-mode .gov-wrapper { display: none !important; }
-        body.scp-mode .messenger-fab, body.scp-mode .messenger-window { display: none !important; }
-        .scp-wrapper { display: none; }
-        body.scp-mode .scp-wrapper { display: block; }
-        .scp-topbar { background: #111; border-bottom: 1px solid #222; font-size: 12px; color: #666; padding: 6px 0; }
-        .scp-topbar-inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; }
-        .scp-topbar span { color: #990000; }
-        .scp-header { background: #0f0f0f; border-bottom: 3px solid #8b0000; padding: 18px 0; position: sticky; top: 0; z-index: 100; }
-        .scp-header-inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
-        .scp-logo { display: flex; align-items: center; gap: 14px; }
-        .scp-emblem { width: 52px; height: 52px; border: 2px solid #8b0000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: #8b0000; background: #0a0a0a; }
-        .scp-logo-text h1 { font-size: 18px; color: #e8e8e8; letter-spacing: 1px; margin-bottom: 2px; }
-        .scp-logo-text p { font-size: 11px; color: #8b0000; letter-spacing: 2px; }
-        .scp-nav { display: flex; gap: 6px; }
-        .scp-nav a { color: #999; font-size: 13px; padding: 8px 14px; border-radius: 3px; }
-        .scp-nav a:hover, .scp-nav a.active { color: #e8e8e8; background: #1a1a1a; }
-        .scp-page { display: none; }
-        .scp-page.active { display: block; }
-        .scp-hero { background: linear-gradient(to bottom, #111 0%, #0b0b0b 100%); border-bottom: 1px solid #1a1a1a; padding: 70px 20px; text-align: center; }
-        .scp-warning { display: inline-block; border: 1px solid #8b0000; color: #8b0000; padding: 6px 18px; font-size: 11px; letter-spacing: 2px; margin-bottom: 24px; }
-        .scp-hero h2 { font-size: 36px; color: #e8e8e8; letter-spacing: 4px; margin-bottom: 10px; }
-        .scp-hero .motto { font-size: 14px; color: #8b0000; letter-spacing: 6px; margin-bottom: 24px; }
-        .scp-hero p { max-width: 680px; margin: 0 auto; color: #777; font-size: 14px; line-height: 1.8; }
-        .scp-container { max-width: 1100px; margin: 0 auto; padding: 48px 20px; }
-        .scp-section-title { font-size: 16px; color: #e0e0e0; letter-spacing: 1.5px; border-left: 3px solid #8b0000; padding-left: 12px; margin-bottom: 22px; }
-        .scp-object { background: #111; border: 1px solid #222; margin-bottom: 16px; padding: 18px 22px; cursor: pointer; }
-        .scp-object:hover { border-color: #8b0000; }
-        .scp-object-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .scp-object-id { color: #8b0000; font-weight: 700; font-size: 14px; }
-        .scp-object-class { font-size: 11px; padding: 3px 10px; border: 1px solid #333; color: #aaa; }
-        .scp-object-class.euclid { border-color: #f9a825; color: #ffee58; }
-        .scp-object-class.keter { border-color: #c62828; color: #ef5350; }
-        .scp-object p { color: #777; font-size: 13px; }
-        .scp-footer { background: #080808; border-top: 1px solid #1a1a1a; padding: 40px 20px; text-align: center; font-size: 12px; color: #444; }
-        .scp-back-btn { display: inline-block; margin-top: 18px; padding: 10px 22px; border: 1px solid #333; color: #666; font-size: 12px; }
-        .scp-back-btn:hover { border-color: #8b0000; color: #8b0000; }
-        .scp-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-        .scp-modal-overlay.active { display: flex; }
-        .scp-modal { background: #111; border: 1px solid #333; width: 100%; max-width: 640px; max-height: 85vh; overflow-y: auto; }
-        .scp-modal-header { padding: 18px 22px; border-bottom: 1px solid #222; display: flex; justify-content: space-between; align-items: center; }
-        .scp-modal-header h3 { color: #e0e0e0; font-size: 15px; }
-        .scp-modal-close { color: #666; font-size: 22px; cursor: pointer; }
-        .scp-modal-body { padding: 22px; color: #888; font-size: 13.5px; line-height: 1.8; }
-        .scp-modal-body .label { color: #8b0000; font-size: 12px; margin-bottom: 4px; }
-        .scp-modal-footer { padding: 14px 22px; border-top: 1px solid #222; display: flex; justify-content: flex-end; }
-        .scp-btn { padding: 8px 18px; border: 1px solid #333; color: #aaa; font-size: 12px; cursor: pointer; }
-
-        @media (max-width: 900px) {
-            .card-grid, .allmenu-inner { grid-template-columns: 1fr 1fr; }
-            .quick-links { grid-template-columns: repeat(3, 1fr); }
-            nav { display: none; }
-            .footer-top { grid-template-columns: 1fr 1fr; }
-            .messenger-window { width: 100%; right: 0; bottom: 0; height: 70vh; border-radius: 12px 12px 0 0; }
-        }
-        @media (max-width: 600px) {
-            .card-grid, .content-grid, .quick-links, .footer-top, .allmenu-inner { grid-template-columns: 1fr; }
-        }
-    </style>
+@media(max-width:1024px){
+nav{display:none}
+.card-grid{grid-template-columns:repeat(2,1fr)}
+.quick-links{grid-template-columns:repeat(3,1fr)}
+.allmenu-inner{grid-template-columns:repeat(2,1fr)}
+.footer-top{grid-template-columns:1fr 1fr}
+.scp-cards{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+.logo-text span{display:none}
+.logo-text strong{font-size:15px}
+.hero{padding:32px 16px}
+.hero h1{font-size:22px}
+.hero p{font-size:14px}
+.content-grid{grid-template-columns:1fr}
+.user-info .name{max-width:70px}
+.scp-nav{width:100%}
+.scp-header-inner{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:600px){
+.card-grid,.quick-links,.footer-top,.allmenu-inner,.scp-cards{grid-template-columns:1fr}
+.gov-banner-inner{flex-direction:column;align-items:flex-start}
+.header-inner{min-height:56px}
+.btn-login{padding:0 10px;font-size:12px}
+.section-title{font-size:18px}
+.page-title{font-size:22px}
+.content-box{padding:18px 16px}
+.board-list a{flex-direction:column;gap:4px}
+.board-list .date{margin-left:0}
+.msg-contacts{width:100px}
+.scp-hero h2{font-size:22px;letter-spacing:1px}
+}
+@media(min-width:769px){
+.modal-overlay{align-items:center;padding:20px}
+.modal{border-radius:10px}
+.messenger-window{left:auto;right:28px;bottom:90px;width:400px;height:520px;border-radius:12px}
+.scp-modal-overlay{align-items:center;padding:20px}
+.scp-modal{border-radius:8px}
+}
+</style>
 </head>
 <body class="gov-mode">
 
 <div class="gov-wrapper">
-    <div class="gov-banner">
-        <div class="gov-banner-inner">
-            <div class="gov-banner-left">
-                <span style="font-size:16px;">🇰🇷</span>
-                <span>이 누리집은 대한민국 공식 전자정부 누리집입니다.</span>
-            </div>
-            <div class="gov-banner-right">
-                <a href="#" onclick="toggleAllMenu(); return false;">전체메뉴</a>
-                <a href="#" onclick="toggleFontSize(); return false;">화면 크기</a>
-                <a href="#" onclick="toggleLang(); return false;" id="langBtn">English</a>
-            </div>
-        </div>
-    </div>
+<div class="gov-banner"><div class="gov-banner-inner">
+<div class="gov-banner-left"><span>🇰🇷</span><span>이 누리집은 대한민국 공식 전자정부 누리집입니다.</span></div>
+<div class="gov-banner-right">
+<a href="#" onclick="toggleAllMenu();return false">전체메뉴</a>
+<a href="#" onclick="toggleFontSize();return false">화면 크기</a>
+<a href="#" onclick="toggleLang();return false" id="langBtn">English</a>
+</div></div></div>
 
-    <div class="allmenu-panel" id="allmenuPanel">
-        <div class="allmenu-inner">
-            <div class="allmenu-col">
-                <strong>기관소개</strong>
-                <a href="#" onclick="showPage('about'); toggleAllMenu(); return false;">설립 목적</a>
-            </div>
-            <div class="allmenu-col">
-                <strong>주요사업</strong>
-                <a href="#" onclick="showPage('business'); toggleAllMenu(); return false;">특수과학 현상 연구</a>
-            </div>
-            <div class="allmenu-col">
-                <strong>정보공개</strong>
-                <a href="#" onclick="showPage('open'); toggleAllMenu(); return false;">정보공개 청구</a>
-                <a href="#" onclick="showPage('news'); toggleAllMenu(); return false;">공지사항</a>
-            </div>
-            <div class="allmenu-col">
-                <strong>기타</strong>
-                <a href="#" onclick="openModal('contactModal'); toggleAllMenu(); return false;">민원안내</a>
-            </div>
-        </div>
-    </div>
+<div class="allmenu-panel" id="allmenuPanel"><div class="allmenu-inner">
+<div class="allmenu-col"><strong>기관소개</strong><a href="#" onclick="showPage('about');toggleAllMenu();return false">설립 목적</a><a href="#" onclick="showPage('about');toggleAllMenu();return false">조직 및 기능</a></div>
+<div class="allmenu-col"><strong>주요사업</strong><a href="#" onclick="showPage('business');toggleAllMenu();return false">연구·분석</a><a href="#" onclick="showPage('business');toggleAllMenu();return false">국제협력</a></div>
+<div class="allmenu-col"><strong>정보공개</strong><a href="#" onclick="showPage('open');toggleAllMenu();return false">정보공개 청구</a><a href="#" onclick="showPage('news');toggleAllMenu();return false">공지사항</a></div>
+<div class="allmenu-col"><strong>기타</strong><a href="#" onclick="openModal('contactModal');toggleAllMenu();return false">민원안내</a><a href="#" onclick="openModal('privacyModal');toggleAllMenu();return false">개인정보처리방침</a></div>
+</div></div>
 
-    <header>
-        <div class="header-inner">
-            <a href="#" class="logo" onclick="showPage('home'); return false;">
-                <div class="logo-symbol">특수<br>과학</div>
-                <div class="logo-text">
-                    <strong>국가특수과학관리원</strong>
-                    <span>National Agency for Special Scientific Management</span>
-                </div>
-            </a>
-            <nav>
-                <ul>
-                    <li><a href="#" data-page="about" class="nav-link">기관소개</a></li>
-                    <li><a href="#" data-page="business" class="nav-link">주요사업</a></li>
-                    <li><a href="#" data-page="research" class="nav-link">연구·자료</a></li>
-                    <li><a href="#" data-page="open" class="nav-link">정보공개</a></li>
-                    <li><a href="#" data-page="participate" class="nav-link">국민참여</a></li>
-                    <li><a href="#" data-page="news" class="nav-link">알림·소식</a></li>
-                </ul>
-            </nav>
-            <div class="header-utils">
-                <div class="user-info" id="userInfo">
-                    <span class="name" id="userName"></span>
-                    <span class="level" id="userLevel"></span>
-                </div>
-                <button class="btn-login" id="loginBtn" onclick="handleLoginClick()">로그인</button>
-                <button class="btn-icon" onclick="toggleSearch()">
-                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
-                </button>
-            </div>
-        </div>
-        <div class="search-panel" id="searchPanel">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="검색어를 입력하세요" onkeydown="if(event.key==='Enter') doSearch()">
-                <button class="btn btn-primary" onclick="doSearch()">검색</button>
-                <button class="btn btn-outline" onclick="toggleSearch()">닫기</button>
-            </div>
-        </div>
-    </header>
+<header><div class="header-inner">
+<a href="#" class="logo" onclick="showPage('home');return false">
+<div class="logo-symbol">특수<br>과학</div>
+<div class="logo-text"><strong>국가특수과학관리원</strong><span>National Agency for Special Scientific Management</span></div>
+</a>
+<nav><ul>
+<li><a href="#" data-page="about" class="nav-link">기관소개</a></li>
+<li><a href="#" data-page="business" class="nav-link">주요사업</a></li>
+<li><a href="#" data-page="research" class="nav-link">연구·자료</a></li>
+<li><a href="#" data-page="open" class="nav-link">정보공개</a></li>
+<li><a href="#" data-page="participate" class="nav-link">국민참여</a></li>
+<li><a href="#" data-page="news" class="nav-link">알림·소식</a></li>
+</ul></nav>
+<div class="header-utils">
+<div class="user-info" id="userInfo"><span class="name" id="userName"></span><span class="level" id="userLevel"></span></div>
+<button class="btn-login" id="loginBtn" onclick="handleLoginClick()">로그인</button>
+<button class="btn-icon" onclick="toggleSearch()"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+</div></div>
+<div class="search-panel" id="searchPanel"><div class="search-box">
+<input type="text" id="searchInput" placeholder="검색어를 입력하세요" onkeydown="if(event.key==='Enter')doSearch()">
+<button class="btn btn-primary" onclick="doSearch()">검색</button>
+<button class="btn btn-outline" onclick="toggleSearch()">닫기</button>
+</div></div></header>
 
-    <main>
-        <div class="page active" id="page-home">
-            <section class="hero">
-                <div class="hero-inner">
-                    <h1>과학기술 기반의<br>국가 특수상황 대응</h1>
-                    <p>국가특수과학관리원은 국가 안보와 국민 안전에 영향을 미칠 수 있는 특수 과학 현상에 대한 연구·분석·관리를 담당하는 정부 기관입니다.</p>
-                    <div class="hero-btns">
-                        <button class="btn btn-primary" onclick="showPage('about')">기관 소개 바로가기</button>
-                        <button class="btn btn-outline" onclick="openModal('infoModal')">정보공개 청구</button>
-                    </div>
-                </div>
-            </section>
-            <div class="container">
-                <!-- 직원 전용 패널 -->
-                <div class="staff-panel" id="staffPanel">
-                    <h3>내부 시스템 · 직원 전용</h3>
-                    <div class="staff-actions">
-                        <button class="btn btn-primary btn-sm" onclick="openNotices()">내부 공지 확인</button>
-                        <button class="btn btn-outline btn-sm" id="writeNoticeBtn" style="display:none;" onclick="openModal('writeNoticeModal')">공지 작성</button>
-                        <button class="btn btn-outline btn-sm" onclick="toggleMessenger()">메신저 열기</button>
-                    </div>
-                    <div id="noticePreview"></div>
-                </div>
+<main>
+<div class="page active" id="page-home">
+<section class="hero"><div class="hero-inner">
+<h1>과학기술 기반의<br>국가 특수상황 대응</h1>
+<p>국가특수과학관리원은 국가 안보와 국민 안전에 영향을 미칠 수 있는 특수·비정형 과학 현상에 대한 연구, 위험 평가, 대응 체계 구축을 전담하는 정부 출연 기관입니다.</p>
+<div class="hero-btns">
+<button class="btn btn-primary" onclick="showPage('about')">기관 소개 바로가기</button>
+<button class="btn btn-outline" onclick="openModal('infoModal')">정보공개 청구</button>
+</div></div></section>
+<div class="container">
+<div class="staff-panel" id="staffPanel">
+<h3>내부 시스템 · 직원 전용</h3>
+<div class="staff-actions">
+<button class="btn btn-primary btn-sm" onclick="openNotices()">내부 공지 확인</button>
+<button class="btn btn-outline btn-sm" id="writeNoticeBtn" style="display:none" onclick="openModal('writeNoticeModal')">공지 작성</button>
+<button class="btn btn-outline btn-sm" onclick="toggleMessenger()">메신저 열기</button>
+</div>
+<div id="noticePreview"></div>
+</div>
+<div class="section-header"><h2 class="section-title">주요 사업</h2><a href="#" class="section-more" onclick="showPage('business');return false">더보기 →</a></div>
+<div class="card-grid">
+<div class="card" onclick="showPage('business')"><div class="card-icon">01</div><h3>특수과학 현상 연구</h3><p>비정형·이상 과학 현상의 발생 원인과 특성을 과학적으로 규명하고 데이터를 축적합니다.</p></div>
+<div class="card" onclick="showPage('business')"><div class="card-icon">02</div><h3>위험 평가 및 분석</h3><p>특수 상황에 대한 위험 평가 모델을 개발하고 대응 전략 수립을 지원합니다.</p></div>
+<div class="card" onclick="showPage('business')"><div class="card-icon">03</div><h3>국제 과학 협력</h3><p>우방국 기관과의 정보 교류·공동 연구로 초국가적 위협에 공동 대응합니다.</p></div>
+<div class="card" onclick="showPage('business')"><div class="card-icon">04</div><h3>전문인력 양성</h3><p>특수 과학 분야 전문인력 교육과정과 역량 강화 프로그램을 운영합니다.</p></div>
+</div>
+<div class="content-grid">
+<div class="board"><div class="board-header"><span>공지사항</span><a href="#" class="section-more" onclick="showPage('news');return false">더보기</a></div>
+<ul class="board-list">
+<li><a href="#" onclick="openNotice('국가특수과학관리원, 국가초상방재원으로 통합 안내','2026.10.01');return false"><span>국가특수과학관리원, 국가초상방재원으로 통합 안내</span><span class="date">2026.10.01</span></a></li>
+<li><a href="#" onclick="openNotice('2026년도 특수과학 연구과제 공모 안내','2026.09.05');return false"><span>2026년도 특수과학 연구과제 공모 안내</span><span class="date">2026.09.05</span></a></li>
+<li><a href="#" onclick="openNotice('국가특수과학관리원 조직개편 안내','2026.08.28');return false"><span>국가특수과학관리원 조직개편 안내</span><span class="date">2026.08.28</span></a></li>
+</ul></div>
+<div class="board"><div class="board-header"><span>보도자료</span><a href="#" class="section-more" onclick="showPage('news');return false">더보기</a></div>
+<ul class="board-list">
+<li><a href="#" onclick="openNotice('특수과학 분야 국제 공동연구 협약 체결','2026.09.02');return false"><span>특수과학 분야 국제 공동연구 협약 체결</span><span class="date">2026.09.02</span></a></li>
+<li><a href="#" onclick="openNotice('2025년 연구성과 대국민 보고회 개최','2026.08.20');return false"><span>2025년 연구성과 대국민 보고회 개최</span><span class="date">2026.08.20</span></a></li>
+</ul></div>
+</div>
+<div class="section-header"><h2 class="section-title">자주 찾는 서비스</h2></div>
+<div class="quick-links">
+<a href="#" class="quick-item" onclick="showPage('open');return false"><div style="font-size:22px">📄</div><strong>정보공개</strong></a>
+<a href="#" class="quick-item" onclick="showPage('research');return false"><div style="font-size:22px">📋</div><strong>연구과제</strong></a>
+<a href="#" class="quick-item" onclick="showPage('news');return false"><div style="font-size:22px">📢</div><strong>공지사항</strong></a>
+<a href="#" class="quick-item" onclick="showPage('participate');return false"><div style="font-size:22px">👥</div><strong>채용정보</strong></a>
+<a href="#" class="quick-item" onclick="openModal('contactModal');return false"><div style="font-size:22px">📞</div><strong>민원안내</strong></a>
+<a href="#" class="quick-item" onclick="openModal('relatedModal');return false"><div style="font-size:22px">🔗</div><strong>관련기관</strong></a>
+</div></div></div>
 
-                <div class="section-header">
-                    <h2 class="section-title">주요 사업</h2>
-                    <a href="#" class="section-more" onclick="showPage('business'); return false;">더보기 →</a>
-                </div>
-                <div class="card-grid">
-                    <div class="card" onclick="showPage('business')"><div class="card-icon">01</div><h3>특수과학 현상 연구</h3><p>비정형 과학 현상에 대한 기초·응용 연구를 수행합니다.</p></div>
-                    <div class="card" onclick="showPage('business')"><div class="card-icon">02</div><h3>위험 평가 및 분석</h3><p>과학적 위험 평가와 대응 전략 수립을 지원합니다.</p></div>
-                    <div class="card" onclick="showPage('business')"><div class="card-icon">03</div><h3>국제 과학 협력</h3><p>우방국 기관과의 정보 교류 및 공동 연구를 추진합니다.</p></div>
-                    <div class="card" onclick="showPage('business')"><div class="card-icon">04</div><h3>전문인력 양성</h3><p>특수 과학 분야 전문인력 교육을 운영합니다.</p></div>
-                </div>
-                <div class="content-grid">
-                    <div class="board">
-                        <div class="board-header"><span>공지사항</span><a href="#" class="section-more" onclick="showPage('news'); return false;">더보기</a></div>
-                        <ul class="board-list">
-                            <li><a href="#" onclick="openNotice('2026년도 특수과학 연구과제 공모 안내','2026.09.05'); return false;"><span>2026년도 특수과학 연구과제 공모 안내</span><span class="date">2026.09.05</span></a></li>
-                        </ul>
-                    </div>
-                    <div class="board">
-                        <div class="board-header"><span>보도자료</span><a href="#" class="section-more" onclick="showPage('news'); return false;">더보기</a></div>
-                        <ul class="board-list">
-                            <li><a href="#" onclick="openNotice('특수과학 분야 국제 공동연구 협약 체결','2026.09.02'); return false;"><span>특수과학 분야 국제 공동연구 협약 체결</span><span class="date">2026.09.02</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="page" id="page-about"><div class="container">
+<h1 class="page-title">기관소개</h1><div class="breadcrumb">홈 <span>›</span> 기관소개</div>
+<div class="content-box"><h3>설립 목적</h3>
+<p>국가특수과학관리원(NASSM)은 국가 안보와 국민 안전에 중대한 영향을 미칠 수 있는 특수·비정형 과학 현상에 대한 체계적 연구·분석·관리 체계를 구축하기 위해 설립된 정부 출연 연구기관입니다.</p>
+<p>일반 과학기술 행정으로 다루기 어려운 이상 현상과 특수 상황에 대해 과학적 근거를 제공하고, 관련 부처의 정책 수립과 현장 대응을 지원합니다.</p></div>
+<div class="content-box"><h3>주요 기능</h3>
+<ul>
+<li>특수·비정형 과학 현상의 탐지, 분류, 특성 분석 및 데이터베이스 구축</li>
+<li>위험도 평가 모델 개발 및 대응 우선순위 제시</li>
+<li>국내외 관련 기관과의 정보 공유 및 공동 연구</li>
+<li>특수 상황 대응 매뉴얼·지침 개발 및 개정</li>
+<li>전문인력 교육·훈련 프로그램 운영</li>
+</ul></div>
+<div class="content-box"><h3>조직 현황</h3>
+<table class="gov-table"><thead><tr><th>부서</th><th>주요 업무</th></tr></thead>
+<tbody>
+<tr><td>기획조정실</td><td>기관 운영 총괄, 예산, 인사, 대외협력</td></tr>
+<tr><td>연구기획과</td><td>연구과제 기획·관리, 성과 평가</td></tr>
+<tr><td>분석평가과</td><td>위험 평가, 데이터 분석, 모델링</td></tr>
+<tr><td>국제협력과</td><td>해외 기관 협력, 정보 교류</td></tr>
+<tr><td>교육훈련과</td><td>전문인력 양성, 교육과정 개발</td></tr>
+<tr><td>안전관리과</td><td>시설 안전, 비상 대응 체계</td></tr>
+</tbody></table></div>
+</div></div>
 
-        <div class="page" id="page-about">
-            <div class="container">
-                <h1 class="page-title">기관소개</h1>
-                <div class="breadcrumb">홈 <span>›</span> 기관소개</div>
-                <div class="content-box"><h3>설립 목적</h3><p>국가특수과학관리원은 특수 과학 현상에 대한 연구·분석·관리를 통해 국가 대응 역량을 강화하기 위해 설립되었습니다.</p></div>
-            </div>
-        </div>
-        <div class="page" id="page-business">
-            <div class="container">
-                <h1 class="page-title">주요사업</h1>
-                <div class="breadcrumb">홈 <span>›</span> 주요사업</div>
-                <div class="card-grid" style="grid-template-columns: repeat(2, 1fr);">
-                    <div class="card"><div class="card-icon">01</div><h3>특수과학 현상 연구</h3><p>비정형 과학 현상에 대한 기초·응용 연구</p></div>
-                    <div class="card"><div class="card-icon">02</div><h3>위험 평가 및 분석</h3><p>위험 평가 모델 개발 및 대응 전략</p></div>
-                </div>
-            </div>
-        </div>
-        <div class="page" id="page-research">
-            <div class="container">
-                <h1 class="page-title">연구·자료</h1>
-                <div class="breadcrumb">홈 <span>›</span> 연구·자료</div>
-                <div class="content-box"><h3>연구과제 현황</h3>
-                    <table class="gov-table"><thead><tr><th>과제명</th><th>기간</th><th>상태</th></tr></thead>
-                    <tbody><tr><td>비정형 과학 현상 데이터 표준화</td><td>2025.03 ~ 2026.12</td><td>진행중</td></tr></tbody></table>
-                </div>
-            </div>
-        </div>
-        <div class="page" id="page-open">
-            <div class="container">
-                <h1 class="page-title">정보공개</h1>
-                <div class="breadcrumb">홈 <span>›</span> 정보공개</div>
-                <div class="content-box">
-                    <h3>정보공개 제도</h3>
-                    <p>「공공기관의 정보공개에 관한 법률」에 따라 운영합니다.</p>
-                    <p style="margin-top:16px;"><button class="btn btn-primary" onclick="openModal('infoModal')">정보공개 청구하기</button></p>
-                </div>
-            </div>
-        </div>
-        <div class="page" id="page-participate">
-            <div class="container">
-                <h1 class="page-title">국민참여</h1>
-                <div class="breadcrumb">홈 <span>›</span> 국민참여</div>
-                <div class="content-box"><h3>채용정보</h3><p>현재 진행 중인 채용 공고가 없습니다.</p></div>
-            </div>
-        </div>
-        <div class="page" id="page-news">
-            <div class="container">
-                <h1 class="page-title">알림·소식</h1>
-                <div class="breadcrumb">홈 <span>›</span> 알림·소식</div>
-                <div class="board">
-                    <div class="board-header"><span>공지사항</span></div>
-                    <ul class="board-list">
-                        <li><a href="#" onclick="openNotice('2026년도 특수과학 연구과제 공모 안내','2026.09.05'); return false;"><span>2026년도 특수과학 연구과제 공모 안내</span><span class="date">2026.09.05</span></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </main>
+<div class="page" id="page-business"><div class="container">
+<h1 class="page-title">주요사업</h1><div class="breadcrumb">홈 <span>›</span> 주요사업</div>
+<div class="content-box"><h3>1. 특수과학 현상 연구</h3><p>기존 과학 이론으로 충분히 설명되지 않는 현상을 대상으로 기초·응용 연구를 수행합니다. 현장 조사, 시료 분석, 장기 모니터링, 시뮬레이션을 통해 데이터 신뢰성을 확보합니다.</p></div>
+<div class="content-box"><h3>2. 위험 평가 및 분석</h3><p>특수 상황의 발생 가능성, 영향 범위, 사회·경제적 파급효과를 종합 평가하는 모델을 개발·운영합니다.</p></div>
+<div class="content-box"><h3>3. 국제 과학 협력</h3><p>해외 유사 기관과의 정보 공유, 공동 연구, 인력 교류를 추진합니다.</p></div>
+<div class="content-box"><h3>4. 전문인력 양성</h3><p>특수 과학 현상 대응에 필요한 전문 지식과 현장 역량을 갖춘 인력을 양성합니다.</p></div>
+</div></div>
 
-    <footer>
-        <div class="footer-inner">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <strong>국가특수과학관리원</strong>
-                    <p>세종특별자치시 도움6로 42<br>대표전화 : 044-000-0000</p>
-                </div>
-                <div class="footer-col"><strong>기관소개</strong><ul><li><a href="#" onclick="showPage('about'); return false;">설립 목적</a></li></ul></div>
-                <div class="footer-col"><strong>정보공개</strong><ul><li><a href="#" onclick="showPage('open'); return false;">정보공개 청구</a></li></ul></div>
-                <div class="footer-col"><strong>관련 사이트</strong><ul><li><a href="#" onclick="openModal('relatedModal'); return false;">과학기술정보통신부</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <div>© 국가특수과학관리원</div>
-                <div class="links"><a href="#" onclick="openModal('privacyModal'); return false;">개인정보처리방침</a></div>
-            </div>
-        </div>
-        <button class="secret-btn" onclick="enterSCP()"></button>
-    </footer>
+<div class="page" id="page-research"><div class="container">
+<h1 class="page-title">연구·자료</h1><div class="breadcrumb">홈 <span>›</span> 연구·자료</div>
+<div class="content-box"><h3>진행 중인 주요 연구과제</h3>
+<table class="gov-table"><thead><tr><th>과제명</th><th>기간</th><th>상태</th></tr></thead>
+<tbody>
+<tr><td>비정형 과학 현상 데이터 표준화 및 DB 구축</td><td>2025.03~2026.12</td><td>진행중</td></tr>
+<tr><td>특수상황 위험평가 모델 고도화</td><td>2025.06~2027.05</td><td>진행중</td></tr>
+<tr><td>국제 공동연구 협력체계 구축</td><td>2024.09~2026.08</td><td>진행중</td></tr>
+<tr><td>전문인력 교육과정 개발</td><td>2025.01~2025.12</td><td>완료</td></tr>
+</tbody></table></div>
+</div></div>
+
+<div class="page" id="page-open"><div class="container">
+<h1 class="page-title">정보공개</h1><div class="breadcrumb">홈 <span>›</span> 정보공개</div>
+<div class="content-box"><h3>정보공개 제도 안내</h3>
+<p>「공공기관의 정보공개에 관한 법률」에 따라 정보공개 제도를 운영합니다. 국가 안보 관련 정보는 법령에 따라 비공개될 수 있습니다.</p>
+<p style="margin-top:16px"><button class="btn btn-primary" onclick="openModal('infoModal')">정보공개 청구하기</button></p></div>
+</div></div>
+
+<div class="page" id="page-participate"><div class="container">
+<h1 class="page-title">국민참여</h1><div class="breadcrumb">홈 <span>›</span> 국민참여</div>
+<div class="content-box"><h3>채용정보</h3><p>현재 진행 중인 공개 채용 공고가 없습니다. 공지사항 및 나라일터를 확인해 주세요.</p></div>
+</div></div>
+
+<div class="page" id="page-news"><div class="container">
+<h1 class="page-title">알림·소식</h1><div class="breadcrumb">홈 <span>›</span> 알림·소식</div>
+<div class="board"><div class="board-header"><span>공지사항</span></div>
+<ul class="board-list">
+<li><a href="#" onclick="openNotice('국가특수과학관리원, 국가초상방재원으로 통합 안내','2026.10.01');return false"><span>국가특수과학관리원, 국가초상방재원으로 통합 안내</span><span class="date">2026.10.01</span></a></li>
+<li><a href="#" onclick="openNotice('2026년도 특수과학 연구과제 공모 안내','2026.09.05');return false"><span>2026년도 특수과학 연구과제 공모 안내</span><span class="date">2026.09.05</span></a></li>
+<li><a href="#" onclick="openNotice('국가특수과학관리원 조직개편 안내','2026.08.28');return false"><span>국가특수과학관리원 조직개편 안내</span><span class="date">2026.08.28</span></a></li>
+</ul></div>
+</div></div>
+</main>
+
+<footer>
+<div class="footer-inner">
+<div class="footer-top">
+<div class="footer-brand"><strong>국가특수과학관리원</strong><p>세종특별자치시 도움6로 42<br>대표전화 : 044-000-0000<br>webmaster@nassm.go.kr</p></div>
+<div class="footer-col"><strong>기관소개</strong><ul><li><a href="#" onclick="showPage('about');return false">설립 목적</a></li></ul></div>
+<div class="footer-col"><strong>정보공개</strong><ul><li><a href="#" onclick="showPage('open');return false">정보공개 청구</a></li></ul></div>
+<div class="footer-col"><strong>관련 사이트</strong><ul><li><a href="#" onclick="openModal('relatedModal');return false">과학기술정보통신부</a></li></ul></div>
+</div>
+<div class="footer-bottom"><div>© 국가특수과학관리원</div><div class="links"><a href="#" onclick="openModal('privacyModal');return false">개인정보처리방침</a></div></div>
+</div>
+<button class="secret-btn" onclick="enterSCP()"></button>
+</footer>
 </div>
 
-<!-- 메신저 -->
-<button class="messenger-fab" id="messengerFab" onclick="toggleMessenger()">💬<span class="badge" id="msgBadge">2</span></button>
+<button class="messenger-fab" id="messengerFab" onclick="toggleMessenger()">💬<span class="badge" id="msgBadge">3</span></button>
 <div class="messenger-window" id="messengerWindow">
-    <div class="msg-header">
-        <h3>내부 메신저 · <span id="msgUserName">-</span></h3>
-        <button onclick="toggleMessenger()">−</button>
-    </div>
-    <div class="msg-body">
-        <div class="msg-contacts" id="msgContacts"></div>
-        <div class="msg-chat">
-            <div class="msg-messages" id="msgMessages"><div class="msg-empty">대화 상대를 선택하세요</div></div>
-            <div class="msg-input-area">
-                <input type="text" id="msgInput" placeholder="메시지 입력..." onkeydown="if(event.key==='Enter') sendMessage()">
-                <button onclick="sendMessage()">➤</button>
-            </div>
-        </div>
-    </div>
+<div class="msg-header"><h3>내부 메신저 · <span id="msgUserName">-</span></h3><button onclick="toggleMessenger()">−</button></div>
+<div class="msg-body">
+<div class="msg-contacts" id="msgContacts"></div>
+<div class="msg-chat">
+<div class="msg-messages" id="msgMessages"><div class="msg-empty">대화 상대를 선택하세요</div></div>
+<div class="msg-input-area">
+<input type="text" id="msgInput" placeholder="메시지 입력..." onkeydown="if(event.key==='Enter')sendMessage()">
+<button onclick="sendMessage()">➤</button>
+</div></div></div></div>
+
+<div class="scp-wrapper">
+<div class="scp-topbar"><div class="scp-topbar-inner"><div>SCP FOUNDATION · <span>KOREAN BRANCH</span></div><div>CLEARANCE LEVEL: <span>2+</span></div></div></div>
+<div class="scp-header"><div class="scp-header-inner">
+<div class="scp-logo"><div class="scp-emblem">SCP</div><div class="scp-logo-text"><h1>SCP 재단 한국 지부</h1><p>SECURE · CONTAIN · PROTECT</p></div></div>
+<div class="scp-nav">
+<a href="#" class="scp-nav-link active" data-scp="home">본부</a>
+<a href="#" class="scp-nav-link" data-scp="about">소개</a>
+<a href="#" class="scp-nav-link" data-scp="objects">객체 DB</a>
+<a href="#" class="scp-nav-link" data-scp="facilities">시설</a>
+</div></div></div>
+
+<div class="scp-page active" id="scp-home">
+<div class="scp-hero">
+<div class="scp-warning">LEVEL 2 CLEARANCE · 한국 지부 인가 인원 전용</div>
+<h2>SCP 재단 한국 지부</h2>
+<div class="motto">SECURE. CONTAIN. PROTECT.</div>
+<p>한반도 및 동아시아 지역 이상 현상을 확보·격리·보호합니다. 공개적으로는 국가특수과학관리원으로 위장 운영됩니다.</p>
+</div>
+<div class="scp-container">
+<div class="scp-section-title">주요 지침</div>
+<div class="scp-cards">
+<div class="scp-card"><h3>SECURE · 확보</h3><p>이상 객체/개체를 일반 사회로부터 안전하게 확보합니다.</p></div>
+<div class="scp-card"><h3>CONTAIN · 격리</h3><p>등급별 격리 절차에 따라 안정적으로 유지·관리합니다.</p></div>
+<div class="scp-card"><h3>PROTECT · 보호</h3><p>인류와 이상 현상 모두를 필요에 따라 보호합니다.</p></div>
+</div>
+<div class="scp-section-title">최근 등록 객체</div>
+<div class="scp-object" onclick="openScpObject('SCP-KO-015','EUCLID','자율 이동형 석상. 시선이 닿지 않으면 이동. Site-21K 격리 중.')">
+<div class="scp-object-header"><span class="scp-object-id">SCP-KO-015</span><span class="scp-object-class euclid">EUCLID</span></div>
+<p>자율 이동형 석상. Site-21K 격리.</p></div>
+<div class="scp-object" onclick="openScpObject('SCP-KO-088','KETER','서울 도심 공간·시간 왜곡. 이동식 대응팀 운영.')">
+<div class="scp-object-header"><span class="scp-object-id">SCP-KO-088</span><span class="scp-object-class keter">KETER</span></div>
+<p>도심 공간·시간 왜곡. 이동식 대응.</p></div>
+<div class="scp-object" onclick="openScpObject('SCP-KO-003','SAFE','기억 변조 문서. 연구 목적 제한 사용.')">
+<div class="scp-object-header"><span class="scp-object-id">SCP-KO-003</span><span class="scp-object-class safe">SAFE</span></div>
+<p>기억 변조 문서. SAFE 격리.</p></div>
+</div></div>
+
+<div class="scp-page" id="scp-about"><div class="scp-container">
+<div class="scp-section-title">한국 지부 소개</div>
+<div class="scp-info-box"><h3>개요</h3>
+<p>SCP 재단 한국 지부는 1950년대 후반 설립되었습니다. 공개적으로는 국가특수과학관리원(NASSM) 형태로 위장 운영됩니다.</p>
+<p>주요 임무: 이상 현상 탐지·확보·격리, 정보 통제, 국내외 협력, 전문 인력 양성.</p></div>
+<div class="scp-info-box"><h3>인가 등급</h3>
+<p>Level 0 위장 기관 직원 · Level 1 기초 · Level 2 표준 연구·격리 · Level 3 고위·현장 · Level 4 지부 운영 · Level 5 O5 관련</p></div>
+</div></div>
+
+<div class="scp-page" id="scp-objects"><div class="scp-container">
+<div class="scp-section-title">객체 데이터베이스</div>
+<table class="scp-table"><thead><tr><th>번호</th><th>등급</th><th>설명</th><th>시설</th></tr></thead>
+<tbody>
+<tr onclick="openScpObject('SCP-KO-003','SAFE','기억 변조 문서')" style="cursor:pointer"><td style="color:#8b0000">SCP-KO-003</td><td>SAFE</td><td>기억 변조 문서</td><td>Site-19K</td></tr>
+<tr onclick="openScpObject('SCP-KO-015','EUCLID','자율 이동 석상')" style="cursor:pointer"><td style="color:#8b0000">SCP-KO-015</td><td>EUCLID</td><td>자율 이동 석상</td><td>Site-21K</td></tr>
+<tr onclick="openScpObject('SCP-KO-088','KETER','도심 공간 왜곡')" style="cursor:pointer"><td style="color:#8b0000">SCP-KO-088</td><td>KETER</td><td>도심 공간 왜곡</td><td>이동식</td></tr>
+</tbody></table>
+</div></div>
+
+<div class="scp-page" id="scp-facilities"><div class="scp-container">
+<div class="scp-section-title">주요 시설</div>
+<table class="scp-table"><thead><tr><th>시설명</th><th>위치</th><th>기능</th></tr></thead>
+<tbody>
+<tr><td>Site-19K</td><td>경기도</td><td>연구 및 SAFE/EUCLID 격리</td></tr>
+<tr><td>Site-21K</td><td>강원도</td><td>고위험 격리</td></tr>
+<tr><td>Area-██K</td><td>[DATA EXPUNGED]</td><td>KETER 전용</td></tr>
+</tbody></table>
+</div></div>
+
+<div class="scp-footer">
+<p>SCP FOUNDATION KOREAN BRANCH · CLASSIFIED</p>
+<a href="#" class="scp-back-btn" onclick="exitSCP();return false">← 위장 기관으로 복귀</a>
+</div>
 </div>
 
-<!-- SCP -->
-<div class="scp-wrapper">
-    <div class="scp-topbar"><div class="scp-topbar-inner"><div>SCP FOUNDATION · <span>KOREAN BRANCH</span></div><div>CLEARANCE LEVEL: <span>2</span></div></div></div>
-    <div class="scp-header">
-        <div class="scp-header-inner">
-            <div class="scp-logo"><div class="scp-emblem">SCP</div><div class="scp-logo-text"><h1>SCP 재단 한국 지부</h1><p>SECURE · CONTAIN · PROTECT</p></div></div>
-            <div class="scp-nav">
-                <a href="#" class="scp-nav-link active" data-scp="home">본부</a>
-                <a href="#" class="scp-nav-link" data-scp="objects">객체 데이터베이스</a>
-            </div>
-        </div>
+<!-- 기관 통합 안내 (접속 시) -->
+<div class="modal-overlay" id="reorgModal">
+  <div class="modal wide">
+    <div class="modal-header">
+      <h3>기관 통·폐합 안내</h3>
+      <button class="modal-close" onclick="dismissReorg(false)">&times;</button>
     </div>
-    <div class="scp-page active" id="scp-home">
-        <div class="scp-hero">
-            <div class="scp-warning">LEVEL 2 CLEARANCE</div>
-            <h2>SCP 재단 한국 지부</h2>
-            <div class="motto">SECURE. CONTAIN. PROTECT.</div>
-            <p>한반도 및 동아시아 지역 이상 현상 확보·격리·보호. 인가 인원 전용.</p>
-        </div>
-        <div class="scp-container">
-            <div class="scp-section-title">최근 등록 객체</div>
-            <div class="scp-object" onclick="openScpObject('SCP-KO-015','EUCLID','자율 이동형 석상. Site-21K 격리 중.')">
-                <div class="scp-object-header"><span class="scp-object-id">SCP-KO-015</span><span class="scp-object-class euclid">EUCLID</span></div>
-                <p>자율 이동형 석상. Site-21K 격리 중.</p>
-            </div>
-            <div class="scp-object" onclick="openScpObject('SCP-KO-088','KETER','도심 공간 왜곡 현상.')">
-                <div class="scp-object-header"><span class="scp-object-id">SCP-KO-088</span><span class="scp-object-class keter">KETER</span></div>
-                <p>도심 공간 왜곡 현상.</p>
-            </div>
-        </div>
+    <div class="modal-body" style="font-size:14.5px;line-height:1.75;color:var(--text-secondary);">
+      <div class="reorg-badge">중요 안내 · 2026. 10. 14. 시행</div>
+      <p style="margin-bottom:12px;color:var(--text);font-weight:600;">
+        「정부조직법」 일부개정법률 및 「국가초상방재원 직제」 대통령령에 따라,<br>
+        <strong style="color:var(--gok-blue);">2026년 10월 14일</strong>부터 국가특수과학관리원은
+        <strong style="color:var(--gok-blue);">국가초상방재원</strong>으로 통합됩니다.
+      </p>
+      <p style="margin-bottom:12px;">
+        이는 국가 안보 및 국민 안전과 관련된 특수·비정형 과학 현상 대응 기능을
+        재난·방재 행정 체계와 일원화하기 위한 정부 조직 개편의 일환으로,
+        행정안전부·과학기술정보통신부·기획재정부 등 관계 부처 협의와
+        국무회의 의결을 거쳐 확정되었습니다.
+      </p>
+      <div class="reorg-box">
+        <strong style="color:var(--text);">통합 이후 주요 사항</strong><br>
+        · 기존 연구·위험평가·국제협력 등 핵심 업무는 국가초상방재원으로 승계됩니다.<br>
+        · 본 누리집 및 민원·정보공개 창구는 전환 기간 중 단계적으로 이전·안내됩니다.<br>
+        · 통합일 이후 공문·증명서 등 공식 명칭은 「국가초상방재원」을 사용합니다.
+      </div>
+      <p style="font-size:13px;color:#6b7280;margin-bottom:0;">
+        근거: 「정부조직법」 제37조, 「국가초상방재원 직제」 대통령령, 관계 부처 합동 보도자료(2026. 9. 30.)
+      </p>
     </div>
-    <div class="scp-page" id="scp-objects">
-        <div class="scp-container">
-            <div class="scp-section-title">객체 데이터베이스</div>
-            <div class="scp-object" onclick="openScpObject('SCP-KO-015','EUCLID','자율 이동형 석상.')">
-                <div class="scp-object-header"><span class="scp-object-id">SCP-KO-015</span><span class="scp-object-class euclid">EUCLID</span></div>
-                <p>자율 이동형 석상</p>
-            </div>
-        </div>
+    <div class="modal-footer">
+      <label class="left-opt">
+        <input type="checkbox" id="reorgDontShow"> 다시 보지 않기
+      </label>
+      <button class="btn btn-primary" onclick="dismissReorg(true)">확인</button>
     </div>
-    <div class="scp-footer">
-        <p>SCP FOUNDATION KOREAN BRANCH · CLASSIFIED</p>
-        <a href="#" class="scp-back-btn" onclick="exitSCP(); return false;">← 위장 기관으로 복귀</a>
-    </div>
+  </div>
 </div>
 
 <!-- 로그인 -->
-<div class="modal-overlay" id="loginModal">
-    <div class="modal">
-        <div class="modal-header"><h3>직원 로그인</h3><button class="modal-close" onclick="closeModal('loginModal')">&times;</button></div>
-        <div class="modal-body">
-            <div class="login-hint">
-                <strong>데모 계정</strong><br>
-                ID: <code>researcher</code> / PW: <code>1234</code> (Level 2)<br>
-                ID: <code>agent</code> / PW: <code>1234</code> (Level 3)<br>
-                ID: <code>admin</code> / PW: <code>1234</code> (Level 4)
-            </div>
-            <div class="form-group"><label>아이디</label><input type="text" id="loginId" placeholder="researcher"></div>
-            <div class="form-group"><label>비밀번호</label><input type="password" id="loginPw" placeholder="1234" onkeydown="if(event.key==='Enter') doLogin()"></div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-outline" onclick="closeModal('loginModal')">취소</button>
-            <button class="btn btn-primary" onclick="doLogin()">로그인</button>
-        </div>
-    </div>
+<div class="modal-overlay" id="loginModal"><div class="modal">
+<div class="modal-header"><h3>직원 로그인</h3><button class="modal-close" onclick="closeModal('loginModal')">&times;</button></div>
+<div class="modal-body">
+<div class="login-hint"><strong>데모 계정 (PW: 1234)</strong><br>
+<code>researcher</code> Lv2 · <code>agent</code> Lv3 · <code>security</code> Lv3<br>
+<code>medic</code> Lv2 · <code>logistics</code> Lv2 · <code>admin</code> Lv4</div>
+<div class="form-group"><label>아이디</label><input type="text" id="loginId" placeholder="researcher"></div>
+<div class="form-group"><label>비밀번호</label><input type="password" id="loginPw" placeholder="1234" onkeydown="if(event.key==='Enter')doLogin()"></div>
 </div>
+<div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('loginModal')">취소</button><button class="btn btn-primary" onclick="doLogin()">로그인</button></div>
+</div></div>
 
-<!-- 공지 목록 -->
-<div class="modal-overlay" id="noticesModal">
-    <div class="modal wide">
-        <div class="modal-header"><h3>내부 공지</h3><button class="modal-close" onclick="closeModal('noticesModal')">&times;</button></div>
-        <div class="modal-body">
-            <ul class="notice-list" id="noticeList"></ul>
-        </div>
-        <div class="modal-footer"><button class="btn btn-primary" onclick="closeModal('noticesModal')">닫기</button></div>
-    </div>
-</div>
+<div class="modal-overlay" id="noticesModal"><div class="modal wide">
+<div class="modal-header"><h3>내부 공지</h3><button class="modal-close" onclick="closeModal('noticesModal')">&times;</button></div>
+<div class="modal-body"><ul class="notice-list" id="noticeList"></ul></div>
+<div class="modal-footer"><button class="btn btn-primary" onclick="closeModal('noticesModal')">닫기</button></div>
+</div></div>
 
-<!-- 공지 상세 -->
-<div class="modal-overlay" id="noticeDetailModal">
-    <div class="modal wide">
-        <div class="modal-header"><h3 id="ndTitle">공지</h3><button class="modal-close" onclick="closeModal('noticeDetailModal')">&times;</button></div>
-        <div class="modal-body">
-            <p style="font-size:13px;color:#6b7280;margin-bottom:16px;" id="ndMeta"></p>
-            <div id="ndContent" style="line-height:1.7;color:var(--text-secondary);white-space:pre-wrap;"></div>
-        </div>
-        <div class="modal-footer"><button class="btn btn-primary" onclick="closeModal('noticeDetailModal')">닫기</button></div>
-    </div>
-</div>
+<div class="modal-overlay" id="noticeDetailModal"><div class="modal wide">
+<div class="modal-header"><h3 id="ndTitle">공지</h3><button class="modal-close" onclick="closeModal('noticeDetailModal')">&times;</button></div>
+<div class="modal-body"><p style="font-size:13px;color:#6b7280;margin-bottom:16px" id="ndMeta"></p><div id="ndContent" style="line-height:1.7;color:var(--text-secondary);white-space:pre-wrap"></div></div>
+<div class="modal-footer"><button class="btn btn-primary" onclick="closeModal('noticeDetailModal')">닫기</button></div>
+</div></div>
 
-<!-- 공지 작성 (admin 전용) -->
-<div class="modal-overlay" id="writeNoticeModal">
-    <div class="modal wide">
-        <div class="modal-header"><h3>내부 공지 작성</h3><button class="modal-close" onclick="closeModal('writeNoticeModal')">&times;</button></div>
-        <div class="modal-body">
-            <div class="form-group"><label>제목</label><input type="text" id="noticeTitleInput" placeholder="공지 제목"></div>
-            <div class="form-group"><label>내용</label><textarea id="noticeContentInput" placeholder="공지 내용을 입력하세요"></textarea></div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-outline" onclick="closeModal('writeNoticeModal')">취소</button>
-            <button class="btn btn-primary" onclick="submitNotice()">등록</button>
-        </div>
-    </div>
+<div class="modal-overlay" id="writeNoticeModal"><div class="modal wide">
+<div class="modal-header"><h3>내부 공지 작성</h3><button class="modal-close" onclick="closeModal('writeNoticeModal')">&times;</button></div>
+<div class="modal-body">
+<div class="form-group"><label>제목</label><input type="text" id="noticeTitleInput"></div>
+<div class="form-group"><label>내용</label><textarea id="noticeContentInput"></textarea></div>
 </div>
+<div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('writeNoticeModal')">취소</button><button class="btn btn-primary" onclick="submitNotice()">등록</button></div>
+</div></div>
 
-<!-- 기타 모달 -->
-<div class="modal-overlay" id="infoModal">
-    <div class="modal">
-        <div class="modal-header"><h3>정보공개 청구</h3><button class="modal-close" onclick="closeModal('infoModal')">&times;</button></div>
-        <div class="modal-body">
-            <div class="form-group"><label>청구인 성명</label><input type="text" id="infoName"></div>
-            <div class="form-group"><label>청구 내용</label><textarea id="infoContent" rows="4" style="width:100%;border:1px solid var(--border);border-radius:6px;padding:12px;"></textarea></div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-outline" onclick="closeModal('infoModal')">취소</button>
-            <button class="btn btn-primary" onclick="submitInfoRequest()">청구하기</button>
-        </div>
-    </div>
+<div class="modal-overlay" id="infoModal"><div class="modal">
+<div class="modal-header"><h3>정보공개 청구</h3><button class="modal-close" onclick="closeModal('infoModal')">&times;</button></div>
+<div class="modal-body">
+<div class="form-group"><label>청구인 성명</label><input type="text" id="infoName"></div>
+<div class="form-group"><label>청구 내용</label><textarea id="infoContent" style="width:100%;border:1px solid var(--border);border-radius:6px;padding:12px;min-height:100px;font-size:16px"></textarea></div>
 </div>
-<div class="modal-overlay" id="contactModal">
-    <div class="modal">
-        <div class="modal-header"><h3>민원 안내</h3><button class="modal-close" onclick="closeModal('contactModal')">&times;</button></div>
-        <div class="modal-body"><p><strong>대표전화</strong> : 044-000-0000</p></div>
-        <div class="modal-footer"><button class="btn btn-primary" onclick="closeModal('contactModal')">확인</button></div>
-    </div>
-</div>
-<div class="modal-overlay" id="noticeModal">
-    <div class="modal">
-        <div class="modal-header"><h3 id="noticeTitle">공지사항</h3><button class="modal-close" onclick="closeModal('noticeModal')">&times;</button></div>
-        <div class="modal-body"><p style="font-size:13px;color:#9ca3af;margin-bottom:12px;" id="noticeDate"></p><p style="color:var(--text-secondary);">상세 내용은 내부 시스템에 등록되어 있습니다.</p></div>
-        <div class="modal-footer"><button class="btn btn-primary" onclick="closeModal('noticeModal')">확인</button></div>
-    </div>
-</div>
-<div class="modal-overlay" id="privacyModal">
-    <div class="modal">
-        <div class="modal-header"><h3>개인정보처리방침</h3><button class="modal-close" onclick="closeModal('privacyModal')">&times;</button></div>
-        <div class="modal-body"><p style="color:var(--text-secondary);">「개인정보 보호법」에 따라 보호합니다.</p></div>
-        <div class="modal-footer"><button class="btn btn-primary" onclick="closeModal('privacyModal')">확인</button></div>
-    </div>
-</div>
-<div class="modal-overlay" id="relatedModal">
-    <div class="modal">
-        <div class="modal-header"><h3>관련 기관</h3><button class="modal-close" onclick="closeModal('relatedModal')">&times;</button></div>
-        <div class="modal-body">
-            <button class="btn btn-outline" style="width:100%;margin-bottom:8px;" onclick="showToast('과학기술정보통신부 (데모)');">과학기술정보통신부</button>
-            <button class="btn btn-outline" style="width:100%;" onclick="showToast('행정안전부 (데모)');">행정안전부</button>
-        </div>
-        <div class="modal-footer"><button class="btn btn-primary" onclick="closeModal('relatedModal')">닫기</button></div>
-    </div>
-</div>
+<div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('infoModal')">취소</button><button class="btn btn-primary" onclick="submitInfoRequest()">청구하기</button></div>
+</div></div>
 
-<div class="scp-modal-overlay" id="scpObjectModal">
-    <div class="scp-modal">
-        <div class="scp-modal-header"><h3 id="scpObjTitle">SCP-KO-XXX</h3><button class="scp-modal-close" onclick="closeScpModal()">&times;</button></div>
-        <div class="scp-modal-body">
-            <div class="label">OBJECT CLASS</div><p id="scpObjClass" style="margin-bottom:16px;color:#ccc;"></p>
-            <div class="label">DESCRIPTION</div><p id="scpObjDesc"></p>
-        </div>
-        <div class="scp-modal-footer"><button class="scp-btn" onclick="closeScpModal()">닫기</button></div>
-    </div>
+<div class="modal-overlay" id="contactModal"><div class="modal">
+<div class="modal-header"><h3>민원 안내</h3><button class="modal-close" onclick="closeModal('contactModal')">&times;</button></div>
+<div class="modal-body"><p><strong>대표전화</strong> 044-000-0000</p><p style="margin-top:8px"><strong>이메일</strong> civil@nassm.go.kr</p><p style="margin-top:8px"><strong>운영</strong> 평일 09:00~18:00</p></div>
+<div class="modal-footer"><button class="btn btn-primary" onclick="closeModal('contactModal')">확인</button></div>
+</div></div>
+
+<div class="modal-overlay" id="noticeModal"><div class="modal">
+<div class="modal-header"><h3 id="noticeTitle">공지사항</h3><button class="modal-close" onclick="closeModal('noticeModal')">&times;</button></div>
+<div class="modal-body"><p style="font-size:13px;color:#9ca3af;margin-bottom:12px" id="noticeDate"></p><p style="color:var(--text-secondary)">상세 내용은 내부 시스템 및 공지사항을 확인해 주시기 바랍니다.</p></div>
+<div class="modal-footer"><button class="btn btn-primary" onclick="closeModal('noticeModal')">확인</button></div>
+</div></div>
+
+<div class="modal-overlay" id="privacyModal"><div class="modal">
+<div class="modal-header"><h3>개인정보처리방침</h3><button class="modal-close" onclick="closeModal('privacyModal')">&times;</button></div>
+<div class="modal-body"><p style="color:var(--text-secondary)">「개인정보 보호법」에 따라 이용자 개인정보를 보호합니다.</p></div>
+<div class="modal-footer"><button class="btn btn-primary" onclick="closeModal('privacyModal')">확인</button></div>
+</div></div>
+
+<div class="modal-overlay" id="relatedModal"><div class="modal">
+<div class="modal-header"><h3>관련 기관</h3><button class="modal-close" onclick="closeModal('relatedModal')">&times;</button></div>
+<div class="modal-body">
+<button class="btn btn-outline" style="width:100%;margin-bottom:8px" onclick="showToast('과학기술정보통신부 (데모)')">과학기술정보통신부</button>
+<button class="btn btn-outline" style="width:100%;margin-bottom:8px" onclick="showToast('행정안전부 (데모)')">행정안전부</button>
+<button class="btn btn-outline" style="width:100%" onclick="showToast('정부24 (데모)')">정부24</button>
 </div>
+<div class="modal-footer"><button class="btn btn-primary" onclick="closeModal('relatedModal')">닫기</button></div>
+</div></div>
+
+<div class="scp-modal-overlay" id="scpObjectModal"><div class="scp-modal">
+<div class="scp-modal-header"><h3 id="scpObjTitle">SCP-KO-XXX</h3><button class="scp-modal-close" onclick="closeScpModal()">&times;</button></div>
+<div class="scp-modal-body"><div class="label">OBJECT CLASS</div><p id="scpObjClass" style="margin-bottom:16px;color:#ccc"></p><div class="label">DESCRIPTION</div><p id="scpObjDesc"></p></div>
+<div class="scp-modal-footer"><button class="scp-btn" onclick="closeScpModal()">닫기</button></div>
+</div></div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-    // ===== 계정 (이름 = ID) =====
-    const accounts = {
-        researcher: { pw: '1234', level: 2 },
-        agent:      { pw: '1234', level: 3 },
-        admin:      { pw: '1234', level: 4 }
-    };
+const accounts={researcher:{pw:'1234',level:2},agent:{pw:'1234',level:3},security:{pw:'1234',level:3},medic:{pw:'1234',level:2},logistics:{pw:'1234',level:2},admin:{pw:'1234',level:4}};
+let currentUser=null,currentChat=null;
+let internalNotices=[
+{id:1,title:'SCP-KO-088 발현 관련 주의 사항',content:'서울 도심 공간·시간 왜곡(SCP-KO-088) 추가 발현 징후 감지.\n\nLevel 2 이상 인원은 해당 구역 접근 시 이동식 대응팀과 사전 협의 바랍니다.\n상세 좌표는 별도 보안 채널로 전달됩니다.',author:'admin',date:'2026.09.08 14:30'},
+{id:2,title:'Site-21K 인력 순환 공지',content:'Site-21K 고위험 격리 구역 인력 순환이 다음 주 월요일부터 시행됩니다.\n사전 브리핑: 금요일 15:00, Site-19K 회의실.',author:'admin',date:'2026.09.05 09:15'},
+{id:3,title:'기억 소거 절차 교육 일정',content:'Level 2 이상 신규 인가 인원 대상 Amnestic 절차 교육.\n목요일 10:00 / Site-19K 교육동 2층',author:'admin',date:'2026.09.03 11:00'}
+];
+const contacts={
+researcher:[{id:'agent',status:'online'},{id:'admin',status:'online'},{id:'medic',status:'online'},{id:'security',status:'offline'}],
+agent:[{id:'researcher',status:'online'},{id:'admin',status:'online'},{id:'security',status:'online'},{id:'logistics',status:'online'}],
+security:[{id:'agent',status:'online'},{id:'admin',status:'online'},{id:'logistics',status:'online'}],
+medic:[{id:'researcher',status:'online'},{id:'admin',status:'online'},{id:'agent',status:'online'}],
+logistics:[{id:'admin',status:'online'},{id:'agent',status:'online'},{id:'security',status:'online'}],
+admin:[{id:'researcher',status:'online'},{id:'agent',status:'online'},{id:'security',status:'online'},{id:'medic',status:'online'},{id:'logistics',status:'online'}]
+};
+const initialChats={
+researcher:{agent:[{from:'them',text:'researcher, SCP-KO-015 관찰 일지 공유 부탁드립니다.',time:'09:12'},{from:'them',text:'어제 이동 패턴이 이전과 다릅니다.',time:'09:13'}],admin:[{from:'them',text:'이번 주 보고서 마감 금요일 18:00입니다.',time:'08:40'}],medic:[{from:'them',text:'현장 노출 인원 건강 체크 일정 확인 부탁.',time:'10:05'}]},
+agent:{researcher:[{from:'them',text:'현장 상황 정리해서 올리겠습니다.',time:'09:15'}],admin:[{from:'them',text:'Site-21K 인력 지원 요청드립니다.',time:'10:02'}],security:[{from:'them',text:'KO-088 발현 징후 포착. 대기 바람.',time:'11:20'}],logistics:[{from:'them',text:'이동식 대응 장비 재고 현황 부탁드립니다.',time:'11:45'}]},
+security:{agent:[{from:'them',text:'현재 반경 통제 중. 이상 없음.',time:'11:22'}],admin:[{from:'them',text:'야간 교대 인원 보고드립니다.',time:'18:30'}]},
+medic:{researcher:[{from:'them',text:'샘플 취급 시 보호 장비 재확인 바랍니다.',time:'10:10'}],admin:[{from:'them',text:'의무실 재고 보충 요청합니다.',time:'14:00'}]},
+logistics:{admin:[{from:'them',text:'다음 주 보급 일정 초안 올렸습니다.',time:'09:50'}],agent:[{from:'them',text:'요청 장비 내일 오전 배송 예정입니다.',time:'15:20'}]},
+admin:{researcher:[{from:'them',text:'보고서 초안 검토 부탁드립니다.',time:'08:55'}],agent:[{from:'them',text:'지원 인력 3명 배정했습니다.',time:'10:15'}],security:[{from:'them',text:'야간 교대 승인했습니다.',time:'18:40'}],medic:[{from:'them',text:'의무실 보충 건 승인.',time:'14:20'}],logistics:[{from:'them',text:'보급 일정 확인. 진행하세요.',time:'10:00'}]}
+};
+let chatData=JSON.parse(JSON.stringify(initialChats));
 
-    let currentUser = null;
-    let currentChat = null;
+/* ===== 통합 안내 모달 ===== */
+function dismissReorg(fromBtn){
+  var cb=document.getElementById('reorgDontShow');
+  if(cb&&cb.checked){
+    try{localStorage.setItem('nassm_reorg_dismissed','1');}catch(e){}
+  }
+  closeModal('reorgModal');
+}
+function showReorgIfNeeded(){
+  try{
+    if(localStorage.getItem('nassm_reorg_dismissed')==='1')return;
+  }catch(e){}
+  var el=document.getElementById('reorgModal');
+  if(el){
+    el.classList.add('active');
+    document.body.style.overflow='hidden';
+  }
+}
+window.addEventListener('DOMContentLoaded',showReorgIfNeeded);
 
-    // ===== 내부 공지 데이터 =====
-    let internalNotices = [
-        {
-            id: 1,
-            title: 'SCP-KO-088 발현 관련 주의 사항',
-            content: '서울 도심 공간 왜곡 현상(SCP-KO-088) 관련 추가 발현이 감지되었습니다.\n\n모든 Level 2 이상 인원은 해당 구역 접근 시 이동식 대응팀과 사전 협의 바랍니다.\n\n상세 좌표 및 절차는 별도 채널로 전달됩니다.',
-            author: 'admin',
-            date: '2026.09.08 14:30'
-        },
-        {
-            id: 2,
-            title: 'Site-21K 인력 순환 공지',
-            content: 'Site-21K 고위험 격리 구역 인력 순환이 다음 주 월요일부터 시행됩니다.\n\n해당 인원은 사전 브리핑에 참석해 주시기 바랍니다.',
-            author: 'admin',
-            date: '2026.09.05 09:15'
-        }
-    ];
-
-    // ===== 메신저 연락처 / 대화 =====
-    const contacts = {
-        researcher: [
-            { id: 'agent', status: 'online' },
-            { id: 'admin', status: 'online' }
-        ],
-        agent: [
-            { id: 'researcher', status: 'online' },
-            { id: 'admin', status: 'online' }
-        ],
-        admin: [
-            { id: 'researcher', status: 'online' },
-            { id: 'agent', status: 'online' }
-        ]
-    };
-
-    const initialChats = {
-        researcher: {
-            agent: [
-                { from: 'them', text: 'researcher, SCP-KO-015 관찰 일지 공유 부탁드립니다.', time: '09:12' },
-                { from: 'them', text: '어제 이동 패턴이 이전과 다르게 나타났습니다.', time: '09:13' }
-            ],
-            admin: [
-                { from: 'them', text: '이번 주 연구 보고서 마감은 금요일입니다.', time: '08:40' }
-            ]
-        },
-        agent: {
-            researcher: [
-                { from: 'them', text: '현장 쪽 상황 정리해서 올리겠습니다.', time: '09:15' }
-            ],
-            admin: [
-                { from: 'them', text: 'Site-21K 쪽 인력 지원 요청드립니다.', time: '10:02' }
-            ]
-        },
-        admin: {
-            researcher: [
-                { from: 'them', text: '보고서 초안 검토 부탁드립니다.', time: '08:55' }
-            ],
-            agent: [
-                { from: 'them', text: '지원 인력 3명 배정했습니다.', time: '10:15' }
-            ]
-        }
-    };
-
-    let chatData = JSON.parse(JSON.stringify(initialChats));
-
-    // ===== 로그인 =====
-    function handleLoginClick() {
-        if (currentUser) logout();
-        else openModal('loginModal');
-    }
-
-    function doLogin() {
-        const id = document.getElementById('loginId').value.trim().toLowerCase();
-        const pw = document.getElementById('loginPw').value;
-        const acc = accounts[id];
-        if (!acc || acc.pw !== pw) {
-            showToast('아이디 또는 비밀번호가 올바르지 않습니다.');
-            return;
-        }
-        currentUser = { id, level: acc.level };
-        closeModal('loginModal');
-        document.getElementById('loginId').value = '';
-        document.getElementById('loginPw').value = '';
-
-        document.getElementById('userName').textContent = currentUser.id;
-        document.getElementById('userLevel').textContent = 'Lv.' + currentUser.level;
-        document.getElementById('userInfo').classList.add('show');
-        document.getElementById('loginBtn').textContent = '로그아웃';
-        document.getElementById('loginBtn').classList.add('logged');
-        document.getElementById('messengerFab').classList.add('show');
-        document.getElementById('msgUserName').textContent = currentUser.id;
-        document.getElementById('staffPanel').classList.add('show');
-
-        // admin만 공지 작성 버튼 표시
-        document.getElementById('writeNoticeBtn').style.display = currentUser.level >= 4 ? 'inline-flex' : 'none';
-
-        renderContacts();
-        renderNoticePreview();
-        showToast(currentUser.id + ' 로 로그인되었습니다. (Level ' + currentUser.level + ')');
-    }
-
-    function logout() {
-        currentUser = null;
-        currentChat = null;
-        document.getElementById('userInfo').classList.remove('show');
-        document.getElementById('loginBtn').textContent = '로그인';
-        document.getElementById('loginBtn').classList.remove('logged');
-        document.getElementById('messengerFab').classList.remove('show');
-        document.getElementById('messengerWindow').classList.remove('open');
-        document.getElementById('staffPanel').classList.remove('show');
-        document.getElementById('msgBadge').style.display = 'flex';
-        showToast('로그아웃되었습니다.');
-    }
-
-    // ===== 공지 =====
-    function renderNoticePreview() {
-        const el = document.getElementById('noticePreview');
-        if (!internalNotices.length) {
-            el.innerHTML = '<p style="font-size:13px;color:#6b7280;">등록된 내부 공지가 없습니다.</p>';
-            return;
-        }
-        const latest = internalNotices.slice(0, 2);
-        el.innerHTML = '<ul class="notice-list">' + latest.map(n => `
-            <li onclick="viewNotice(${n.id})">
-                <div class="ntitle">${n.title}</div>
-                <div class="nmeta">${n.author} · ${n.date}</div>
-            </li>
-        `).join('') + '</ul>';
-    }
-
-    function openNotices() {
-        if (!currentUser) return;
-        const list = document.getElementById('noticeList');
-        list.innerHTML = internalNotices.map(n => `
-            <li onclick="viewNotice(${n.id}); closeModal('noticesModal');">
-                <div class="ntitle">${n.title}</div>
-                <div class="nmeta">${n.author} · ${n.date}</div>
-            </li>
-        `).join('') || '<p style="color:#6b7280;font-size:14px;">등록된 공지가 없습니다.</p>';
-        openModal('noticesModal');
-    }
-
-    function viewNotice(id) {
-        const n = internalNotices.find(x => x.id === id);
-        if (!n) return;
-        document.getElementById('ndTitle').textContent = n.title;
-        document.getElementById('ndMeta').textContent = n.author + ' · ' + n.date;
-        document.getElementById('ndContent').textContent = n.content;
-        openModal('noticeDetailModal');
-    }
-
-    function submitNotice() {
-        if (!currentUser || currentUser.level < 4) {
-            showToast('공지 작성 권한이 없습니다. (admin 전용)');
-            return;
-        }
-        const title = document.getElementById('noticeTitleInput').value.trim();
-        const content = document.getElementById('noticeContentInput').value.trim();
-        if (!title || !content) {
-            showToast('제목과 내용을 모두 입력해 주세요.');
-            return;
-        }
-        const now = new Date();
-        const dateStr = now.getFullYear() + '.' +
-            String(now.getMonth()+1).padStart(2,'0') + '.' +
-            String(now.getDate()).padStart(2,'0') + ' ' +
-            String(now.getHours()).padStart(2,'0') + ':' +
-            String(now.getMinutes()).padStart(2,'0');
-
-        internalNotices.unshift({
-            id: Date.now(),
-            title,
-            content,
-            author: currentUser.id,
-            date: dateStr
-        });
-
-        document.getElementById('noticeTitleInput').value = '';
-        document.getElementById('noticeContentInput').value = '';
-        closeModal('writeNoticeModal');
-        renderNoticePreview();
-        showToast('내부 공지가 등록되었습니다.');
-    }
-
-    // ===== 메신저 =====
-    function toggleMessenger() {
-        if (!currentUser) return;
-        const win = document.getElementById('messengerWindow');
-        win.classList.toggle('open');
-        if (win.classList.contains('open')) document.getElementById('msgBadge').style.display = 'none';
-    }
-
-    function renderContacts() {
-        const list = contacts[currentUser.id] || [];
-        document.getElementById('msgContacts').innerHTML = list.map(c => `
-            <div class="contact-item" data-id="${c.id}" onclick="selectChat('${c.id}')">
-                <div class="cname"><span class="cstatus ${c.status}"></span>${c.id}</div>
-                <div class="clevel">Level ${accounts[c.id] ? accounts[c.id].level : '?'}</div>
-            </div>
-        `).join('');
-    }
-
-    function selectChat(contactId) {
-        currentChat = contactId;
-        document.querySelectorAll('.contact-item').forEach(el => {
-            el.classList.toggle('active', el.dataset.id === contactId);
-        });
-        renderMessages();
-    }
-
-    function renderMessages() {
-        const box = document.getElementById('msgMessages');
-        if (!currentChat) {
-            box.innerHTML = '<div class="msg-empty">대화 상대를 선택하세요</div>';
-            return;
-        }
-        const msgs = (chatData[currentUser.id] && chatData[currentUser.id][currentChat]) || [];
-        if (!msgs.length) {
-            box.innerHTML = '<div class="msg-empty">아직 대화가 없습니다.<br>메시지를 보내보세요.</div>';
-            return;
-        }
-        box.innerHTML = msgs.map(m => `
-            <div class="msg-bubble ${m.from}">
-                <div class="meta">${m.time}</div>
-                ${m.text}
-            </div>
-        `).join('');
-        box.scrollTop = box.scrollHeight;
-    }
-
-    function sendMessage() {
-        if (!currentUser || !currentChat) return;
-        const input = document.getElementById('msgInput');
-        const text = input.value.trim();
-        if (!text) return;
-        const now = new Date();
-        const time = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
-        if (!chatData[currentUser.id]) chatData[currentUser.id] = {};
-        if (!chatData[currentUser.id][currentChat]) chatData[currentUser.id][currentChat] = [];
-        chatData[currentUser.id][currentChat].push({ from: 'me', text, time });
-        input.value = '';
-        renderMessages();
-
-        setTimeout(() => {
-            const replies = ['확인했습니다.', '알겠습니다.', '추가 정보 있으면 공유 부탁드립니다.', '수신 완료.', 'Level 제한으로 상세 내용은 별도 채널로 전달하겠습니다.'];
-            const reply = replies[Math.floor(Math.random() * replies.length)];
-            const t2 = new Date();
-            const time2 = String(t2.getHours()).padStart(2,'0') + ':' + String(t2.getMinutes()).padStart(2,'0');
-            chatData[currentUser.id][currentChat].push({ from: 'them', text: reply, time: time2 });
-            if (currentChat) renderMessages();
-        }, 1000 + Math.random() * 1500);
-    }
-
-    // ===== 공통 =====
-    function showPage(pageId) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById('page-' + pageId).classList.add('active');
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('active');
-            if (link.dataset.page === pageId) link.classList.add('active');
-        });
-        document.getElementById('searchPanel').classList.remove('active');
-        document.getElementById('allmenuPanel').classList.remove('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function(e) { e.preventDefault(); showPage(this.dataset.page); });
-    });
-    function toggleSearch() {
-        document.getElementById('searchPanel').classList.toggle('active');
-        document.getElementById('allmenuPanel').classList.remove('active');
-    }
-    function toggleAllMenu() {
-        document.getElementById('allmenuPanel').classList.toggle('active');
-        document.getElementById('searchPanel').classList.remove('active');
-    }
-    function doSearch() {
-        const keyword = document.getElementById('searchInput').value.trim();
-        if (!keyword) { showToast('검색어를 입력해 주세요.'); return; }
-        showToast('"' + keyword + '" 검색 결과 (데모)');
-        document.getElementById('searchInput').value = '';
-        toggleSearch();
-    }
-    let fontLevel = 0;
-    function toggleFontSize() {
-        fontLevel = (fontLevel + 1) % 3;
-        document.body.classList.remove('font-large', 'font-xlarge');
-        if (fontLevel === 1) showToast('글자 크기: 크게');
-        else if (fontLevel === 2) showToast('글자 크기: 가장 크게');
-        else showToast('글자 크기: 기본');
-    }
-    let isEnglish = false;
-    function toggleLang() {
-        isEnglish = !isEnglish;
-        document.getElementById('langBtn').textContent = isEnglish ? '한국어' : 'English';
-        showToast(isEnglish ? 'English mode (Demo)' : '한국어 모드');
-    }
-    function openModal(id) {
-        document.getElementById(id).classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    function closeModal(id) {
-        document.getElementById(id).classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    function openNotice(title, date) {
-        document.getElementById('noticeTitle').textContent = title;
-        document.getElementById('noticeDate').textContent = '등록일 : ' + date;
-        openModal('noticeModal');
-    }
-    function submitInfoRequest() {
-        const name = document.getElementById('infoName').value.trim();
-        const content = document.getElementById('infoContent').value.trim();
-        if (!name || !content) { showToast('성명과 내용을 입력해 주세요.'); return; }
-        closeModal('infoModal');
-        document.getElementById('infoName').value = '';
-        document.getElementById('infoContent').value = '';
-        showToast('정보공개 청구가 접수되었습니다.');
-    }
-    function showToast(msg) {
-        const toast = document.getElementById('toast');
-        toast.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2800);
-    }
-    document.querySelectorAll('.modal-overlay').forEach(overlay => {
-        overlay.addEventListener('click', function(e) {
-            if (e.target === this) { this.classList.remove('active'); document.body.style.overflow = ''; }
-        });
-    });
-
-    function enterSCP() {
-        document.body.classList.remove('gov-mode');
-        document.body.classList.add('scp-mode');
-        document.title = 'SCP 재단 한국 지부';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    function exitSCP() {
-        document.body.classList.remove('scp-mode');
-        document.body.classList.add('gov-mode');
-        document.title = '국가특수과학관리원';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    document.querySelectorAll('.scp-nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = this.dataset.scp;
-            document.querySelectorAll('.scp-page').forEach(p => p.classList.remove('active'));
-            document.getElementById('scp-' + target).classList.add('active');
-            document.querySelectorAll('.scp-nav-link').forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    });
-    function openScpObject(id, objClass, desc) {
-        document.getElementById('scpObjTitle').textContent = id;
-        document.getElementById('scpObjClass').textContent = objClass;
-        document.getElementById('scpObjDesc').textContent = desc;
-        document.getElementById('scpObjectModal').classList.add('active');
-    }
-    function closeScpModal() {
-        document.getElementById('scpObjectModal').classList.remove('active');
-    }
-    document.getElementById('scpObjectModal').addEventListener('click', function(e) {
-        if (e.target === this) closeScpModal();
-    });
+function handleLoginClick(){if(currentUser)logout();else openModal('loginModal')}
+function doLogin(){
+const id=document.getElementById('loginId').value.trim().toLowerCase();
+const pw=document.getElementById('loginPw').value;
+const acc=accounts[id];
+if(!acc||acc.pw!==pw){showToast('아이디 또는 비밀번호가 올바르지 않습니다.');return}
+currentUser={id,level:acc.level};
+closeModal('loginModal');
+document.getElementById('loginId').value='';
+document.getElementById('loginPw').value='';
+document.getElementById('userName').textContent=currentUser.id;
+document.getElementById('userLevel').textContent='Lv.'+currentUser.level;
+document.getElementById('userInfo').classList.add('show');
+document.getElementById('loginBtn').textContent='로그아웃';
+document.getElementById('loginBtn').classList.add('logged');
+document.getElementById('messengerFab').classList.add('show');
+document.getElementById('msgUserName').textContent=currentUser.id;
+document.getElementById('staffPanel').classList.add('show');
+document.getElementById('writeNoticeBtn').style.display=currentUser.level>=4?'inline-flex':'none';
+renderContacts();renderNoticePreview();
+showToast(currentUser.id+' 로 로그인 (Level '+currentUser.level+')');
+}
+function logout(){
+currentUser=null;currentChat=null;
+document.getElementById('userInfo').classList.remove('show');
+document.getElementById('loginBtn').textContent='로그인';
+document.getElementById('loginBtn').classList.remove('logged');
+document.getElementById('messengerFab').classList.remove('show');
+document.getElementById('messengerWindow').classList.remove('open');
+document.getElementById('staffPanel').classList.remove('show');
+document.getElementById('msgBadge').style.display='flex';
+showToast('로그아웃되었습니다.');
+}
+function renderNoticePreview(){
+const el=document.getElementById('noticePreview');
+if(!internalNotices.length){el.innerHTML='<p style="font-size:13px;color:#6b7280">등록된 내부 공지가 없습니다.</p>';return}
+el.innerHTML='<ul class="notice-list">'+internalNotices.slice(0,3).map(n=>`<li onclick="viewNotice(${n.id})"><div class="ntitle">${n.title}</div><div class="nmeta">${n.author} · ${n.date}</div></li>`).join('')+'</ul>';
+}
+function openNotices(){
+if(!currentUser)return;
+document.getElementById('noticeList').innerHTML=internalNotices.map(n=>`<li onclick="viewNotice(${n.id});closeModal('noticesModal')"><div class="ntitle">${n.title}</div><div class="nmeta">${n.author} · ${n.date}</div></li>`).join('')||'<p style="color:#6b7280;font-size:14px">등록된 공지가 없습니다.</p>';
+openModal('noticesModal');
+}
+function viewNotice(id){
+const n=internalNotices.find(x=>x.id===id);if(!n)return;
+document.getElementById('ndTitle').textContent=n.title;
+document.getElementById('ndMeta').textContent=n.author+' · '+n.date;
+document.getElementById('ndContent').textContent=n.content;
+openModal('noticeDetailModal');
+}
+function submitNotice(){
+if(!currentUser||currentUser.level<4){showToast('공지 작성 권한 없음 (admin 전용)');return}
+const title=document.getElementById('noticeTitleInput').value.trim();
+const content=document.getElementById('noticeContentInput').value.trim();
+if(!title||!content){showToast('제목과 내용을 입력해 주세요.');return}
+const now=new Date();
+const dateStr=now.getFullYear()+'.'+String(now.getMonth()+1).padStart(2,'0')+'.'+String(now.getDate()).padStart(2,'0')+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+internalNotices.unshift({id:Date.now(),title,content,author:currentUser.id,date:dateStr});
+document.getElementById('noticeTitleInput').value='';
+document.getElementById('noticeContentInput').value='';
+closeModal('writeNoticeModal');renderNoticePreview();
+showToast('내부 공지가 등록되었습니다.');
+}
+function toggleMessenger(){
+if(!currentUser)return;
+const win=document.getElementById('messengerWindow');
+win.classList.toggle('open');
+if(win.classList.contains('open'))document.getElementById('msgBadge').style.display='none';
+}
+function renderContacts(){
+const list=contacts[currentUser.id]||[];
+document.getElementById('msgContacts').innerHTML=list.map(c=>`<div class="contact-item" data-id="${c.id}" onclick="selectChat('${c.id}')"><div class="cname"><span class="cstatus ${c.status}"></span>${c.id}</div><div class="clevel">Level ${accounts[c.id]?accounts[c.id].level:'?'}</div></div>`).join('');
+}
+function selectChat(contactId){
+currentChat=contactId;
+document.querySelectorAll('.contact-item').forEach(el=>el.classList.toggle('active',el.dataset.id===contactId));
+renderMessages();
+}
+function renderMessages(){
+const box=document.getElementById('msgMessages');
+if(!currentChat){box.innerHTML='<div class="msg-empty">대화 상대를 선택하세요</div>';return}
+const msgs=(chatData[currentUser.id]&&chatData[currentUser.id][currentChat])||[];
+if(!msgs.length){box.innerHTML='<div class="msg-empty">아직 대화가 없습니다.<br>메시지를 보내보세요.</div>';return}
+box.innerHTML=msgs.map(m=>`<div class="msg-bubble ${m.from}"><div class="meta">${m.time}</div>${m.text}</div>`).join('');
+box.scrollTop=box.scrollHeight;
+}
+function sendMessage(){
+if(!currentUser||!currentChat)return;
+const input=document.getElementById('msgInput');
+const text=input.value.trim();if(!text)return;
+const now=new Date();
+const time=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+if(!chatData[currentUser.id])chatData[currentUser.id]={};
+if(!chatData[currentUser.id][currentChat])chatData[currentUser.id][currentChat]=[];
+chatData[currentUser.id][currentChat].push({from:'me',text,time});
+input.value='';renderMessages();
+setTimeout(()=>{
+const replies=['확인했습니다.','알겠습니다.','추가 정보 있으면 공유 부탁드립니다.','수신 완료.','Level 제한으로 상세는 별도 채널로 전달하겠습니다.','현재 상황 모니터링 중입니다.'];
+const reply=replies[Math.floor(Math.random()*replies.length)];
+const t2=new Date();
+const time2=String(t2.getHours()).padStart(2,'0')+':'+String(t2.getMinutes()).padStart(2,'0');
+chatData[currentUser.id][currentChat].push({from:'them',text:reply,time:time2});
+if(currentChat)renderMessages();
+},1000+Math.random()*1800);
+}
+function showPage(pageId){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById('page-'+pageId).classList.add('active');
+document.querySelectorAll('.nav-link').forEach(link=>{link.classList.remove('active');if(link.dataset.page===pageId)link.classList.add('active')});
+document.getElementById('searchPanel').classList.remove('active');
+document.getElementById('allmenuPanel').classList.remove('active');
+window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.nav-link').forEach(link=>link.addEventListener('click',function(e){e.preventDefault();showPage(this.dataset.page)}));
+function toggleSearch(){document.getElementById('searchPanel').classList.toggle('active');document.getElementById('allmenuPanel').classList.remove('active')}
+function toggleAllMenu(){document.getElementById('allmenuPanel').classList.toggle('active');document.getElementById('searchPanel').classList.remove('active')}
+function doSearch(){const k=document.getElementById('searchInput').value.trim();if(!k){showToast('검색어를 입력해 주세요.');return}showToast('"'+k+'" 검색 결과 (데모)');document.getElementById('searchInput').value='';toggleSearch()}
+let fontLevel=0;
+function toggleFontSize(){fontLevel=(fontLevel+1)%3;showToast(fontLevel===0?'글자 크기: 기본':fontLevel===1?'글자 크기: 크게':'글자 크기: 가장 크게')}
+let isEnglish=false;
+function toggleLang(){isEnglish=!isEnglish;document.getElementById('langBtn').textContent=isEnglish?'한국어':'English';showToast(isEnglish?'English mode (Demo)':'한국어 모드')}
+function openModal(id){document.getElementById(id).classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(id){document.getElementById(id).classList.remove('active');document.body.style.overflow=''}
+function openNotice(title,date){document.getElementById('noticeTitle').textContent=title;document.getElementById('noticeDate').textContent='등록일 : '+date;openModal('noticeModal')}
+function submitInfoRequest(){const n=document.getElementById('infoName').value.trim(),c=document.getElementById('infoContent').value.trim();if(!n||!c){showToast('성명과 내용을 입력해 주세요.');return}closeModal('infoModal');document.getElementById('infoName').value='';document.getElementById('infoContent').value='';showToast('정보공개 청구가 접수되었습니다.')}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800)}
+document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',function(e){if(e.target===this){this.classList.remove('active');document.body.style.overflow=''}}));
+function enterSCP(){document.body.classList.remove('gov-mode');document.body.classList.add('scp-mode');document.title='SCP 재단 한국 지부';window.scrollTo({top:0,behavior:'smooth'})}
+function exitSCP(){document.body.classList.remove('scp-mode');document.body.classList.add('gov-mode');document.title='국가특수과학관리원';window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.scp-nav-link').forEach(link=>link.addEventListener('click',function(e){e.preventDefault();const t=this.dataset.scp;document.querySelectorAll('.scp-page').forEach(p=>p.classList.remove('active'));document.getElementById('scp-'+t).classList.add('active');document.querySelectorAll('.scp-nav-link').forEach(l=>l.classList.remove('active'));this.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}));
+function openScpObject(id,c,d){document.getElementById('scpObjTitle').textContent=id;document.getElementById('scpObjClass').textContent=c;document.getElementById('scpObjDesc').textContent=d;document.getElementById('scpObjectModal').classList.add('active')}
+function closeScpModal(){document.getElementById('scpObjectModal').classList.remove('active')}
+document.getElementById('scpObjectModal').addEventListener('click',function(e){if(e.target===this)closeScpModal()});
 </script>
 </body>
 </html>
